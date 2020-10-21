@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="database-hierarchy" stroke="#cccccc">
+            <ellipse id="Oval" cx="12" cy="8.001" rx="5.5" ry="2.5"></ellipse>
+            <ellipse id="Oval" cx="21" cy="2.001" rx="2.5" ry="1.5"></ellipse>
+            <path d="M23.5,2 L23.5,5 C23.5,5.828 22.381,6.5 21,6.5 C19.619,6.5 18.5,5.829 18.5,5 L18.5,2" id="Shape"></path>
+            <ellipse id="Oval" cx="3" cy="2.001" rx="2.5" ry="1.5"></ellipse>
+            <path d="M5.5,2 L5.5,5 C5.5,5.828 4.381,6.5 3,6.5 C1.619,6.5 0.5,5.829 0.5,5 L0.5,2" id="Shape"></path>
+            <ellipse id="Oval" cx="21" cy="19.001" rx="2.5" ry="1.5"></ellipse>
+            <path d="M23.5,19 L23.5,22 C23.5,22.828 22.381,23.5 21,23.5 C19.619,23.5 18.5,22.828 18.5,22 L18.5,19" id="Shape"></path>
+            <ellipse id="Oval" cx="3" cy="19.001" rx="2.5" ry="1.5"></ellipse>
+            <path d="M5.5,19 L5.5,22 C5.5,22.828 4.381,23.5 3,23.5 C1.619,23.5 0.5,22.829 0.5,22 L0.5,19" id="Shape"></path>
+            <path d="M17.5,12 C17.5,13.381 15.037,14.5 12,14.5 C8.963,14.5 6.5,13.382 6.5,12" id="Shape"></path>
+            <path d="M6.5,8 L6.5,16 C6.5,17.381 8.963,18.5 12,18.5 C15.037,18.5 17.5,17.381 17.5,16 L17.5,8" id="Shape"></path>
+            <line x1="5.309" y1="5.578" x2="6.851" y2="7.12" id="Shape"></line>
+            <line x1="18.691" y1="5.578" x2="17.149" y2="7.12" id="Shape"></line>
+            <line x1="5.355" y1="18.497" x2="6.906" y2="16.945" id="Shape"></line>
+            <line x1="18.645" y1="18.497" x2="17.094" y2="16.945" id="Shape"></line>
+        </g>
+    </g>
+</svg>

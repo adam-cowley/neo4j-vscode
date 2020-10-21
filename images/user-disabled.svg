@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Light" stroke="#cccccc">
+            <circle id="Oval" cx="17.5" cy="17.5" r="6"></circle>
+            <line x1="13.258" y1="21.742" x2="21.743" y2="13.257" id="Shape"></line>
+            <path d="M2.484,2.223 C3.5791436,3.35883148 5.08920009,4.00032572 6.667,4.00000015 C7.45783465,4.00018064 8.24041557,3.83924117 8.967,3.527" id="Shape"></path>
+            <circle id="Oval" cx="5.5" cy="4" r="3.5"></circle>
+            <path d="M10.013,11.845 C9.00706077,9.73581729 6.67436856,8.60468042 4.39532825,9.12095624 C2.11628795,9.63723205 0.498784778,11.663215 0.499999316,14 L0.499999316,17.5 L2.99999932,17.5 L3.49999932,23.5 L7.49999932,23.5 L7.99999932,17.5 L9.482,17.5" id="Shape"></path>
+        </g>
+    </g>
+</svg>
