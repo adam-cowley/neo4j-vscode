@@ -5,23 +5,11 @@ import Neo4jTreeDataProvider from './tree/neo4j-tree-data.provider';
 
 import { CONNECTIONS, schemes } from './constants'
 
-
-
-
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-
 	const treeDataProvider = new Neo4jTreeDataProvider(context)
 	context.subscriptions.push(vscode.window.registerTreeDataProvider("neo4j", treeDataProvider))
-
-	// console.log(treeDataProvider);
-
-
-
-
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
@@ -40,6 +28,24 @@ export function activate(context: vscode.ExtensionContext) {
 			treeDataProvider.refresh()
 
 			vscode.window.showInformationMessage('Databases cleared');
+		}
+	}))
+
+	context.subscriptions.push(vscode.commands.registerCommand('neo4j.removeConnection', async () => {
+		const connections: Record<string, any> = context.globalState.get(CONNECTIONS) as Record<string, any>
+
+		const id = await vscode.window.showQuickPick(Object.keys(connections), { placeHolder: 'Which database would you like to remove?' })
+
+		if ( id && connections.hasOwnProperty(id) ) {
+			const { scheme, host, port, database, username } = connections[ id ]
+
+			delete connections[ id ]
+
+			await context.globalState.update(CONNECTIONS, connections)
+
+			vscode.window.showInformationMessage(`The connection to ${scheme}://${username}@${host}:${port}${database ? ` with default database ${database}` : ''} has been removed.`);
+
+			treeDataProvider.refresh()
 		}
 	}))
 

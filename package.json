@@ -13,6 +13,7 @@
 	],
 	"activationEvents": [
 		"onCommand:neo4j.addConnection",
+		"onCommand:neo4j.removeConnection",
 		"onCommand:neo4j.clearConnections",
 		"onCommand:neo4j.addLocalhost",
 		"onCommand:neo4j.refresh"
@@ -37,6 +38,10 @@
 				"title": "Neo4j: Add Connection"
 			},
 			{
+				"command": "neo4j.removeConnection",
+				"title": "Neo4j: Remove Connection"
+			},
+			{
 				"command": "neo4j.clearConnections",
 				"title": "Neo4j: Clear Connections"
 			},
@@ -51,6 +56,7 @@
 		],
 		"keybindings": [
 			{ "command": "neo4j.addConnection", "key": "ctrl+alt+,", "mac": "shift+cmd+," },
+			{ "command": "neo4j.removeConnection", "key": "ctrl+alt+,", "mac": "shift+cmd-," },
 			{ "command": "neo4j.clearConnections", "key": "ctrl+alt+.", "mac": "shift+cmd+." },
 			{ "command": "neo4j.refresh", "key": "ctrl+alt+.", "mac": "shift+cmd+/" }
 		]
