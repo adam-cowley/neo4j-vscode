@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="24px" viewBox="0 0 25 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="database-subtract" stroke="#cccccc">
+            <path d="M19.522,4.526 C19.522,6.731 15.268,8.526 10.022,8.526 C4.776,8.526 0.522,6.731 0.522,4.526 C0.522,2.321 4.776,0.5 10.022,0.5 C15.268,0.5 19.522,2.315 19.522,4.526 Z" id="Shape"></path>
+            <path d="M10.022,12.526 C4.776,12.526 0.522,10.731 0.522,8.526" id="Shape"></path>
+            <path d="M8.522,16.975 C3.989,16.675 0.522,15.017 0.522,13.026" id="Shape"></path>
+            <path d="M9.022,21.493 C4.246,21.281 0.522,19.593 0.522,17.526 L0.522,4.5" id="Shape"></path>
+            <line x1="19.522" y1="4.501" x2="19.522" y2="9.001" id="Shape"></line>
+            <circle id="Oval" cx="17.519" cy="17.501" r="6"></circle>
+            <line x1="20.519" y1="17.501" x2="14.519" y2="17.501" id="Shape"></line>
+        </g>
+    </g>
+</svg>

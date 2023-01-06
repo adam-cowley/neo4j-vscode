@@ -1,0 +1,58 @@
+{
+	// Place your neo4j-vscode workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+	// Placeholders with the same ids are connected.
+	// Example:
+	"MATCH": {
+		"prefix": "ma",
+		"body": [
+			"MATCH (${1:n}:${2:Label})"
+		],
+		"description": "Match a Node with a label"
+	},
+	"MERGE": {
+		"prefix": "me",
+		"body": [
+			"MERGE (${1:n}:${2:Label} { ${3:id}: ${4:\\$${3}} })"
+		],
+		"description": "Match a Node with a label"
+	},
+	"Node": {
+		"prefix": "node",
+		"body": [
+			"(${1:n}:${2:Label})"
+		],
+		"description": "Add a node to a pattern"
+	},
+	"Outgoing Relationship": {
+		"prefix": "out",
+		"body": [
+			"-[${1:n}:${2:TYPE})]->"
+		],
+		"description": "Add an outgoing relationship to a pattern"
+	},
+	"Incoming Relationship": {
+		"prefix": "in",
+		"body": [
+			"<-[${1:n}:${2:TYPE})]-"
+		],
+		"description": "Add an incoming relationship to a pattern"
+	},
+	"WITH": {
+		"prefix": "wi",
+		"body": [
+			"WITH ${1:*}"
+		],
+		"description": "Add flow control step using WITH"
+	},
+	"Return": {
+		"prefix": "ret",
+		"body": [
+			"RETURN ${1:*}"
+		],
+		"description": "Return something"
+	},
+}
