@@ -1,4 +1,12 @@
-import { isDate, isDateTime, isDuration, isInt, isLocalDateTime, isLocalTime, isTime } from "neo4j-driver"
+import neo4j, {
+  isDate,
+  isDateTime,
+  isDuration,
+  isInt,
+  isLocalDateTime,
+  isLocalTime,
+  isTime
+} from "neo4j-driver"
 import { Connection, Scheme, SCHEME_NEO4J } from "./constants"
 
 export function extractCredentials(uri: string): Connection | undefined {
@@ -40,12 +48,12 @@ export function extractCredentials(uri: string): Connection | undefined {
 }
 
 // TODO: Get tests working
-// console.log(extractCredentials("neo4j+s://2ac9b0be.databases.neo4j.io")) // {"scheme":"neo4j+s","host":"2ac9b0be.databases.neo4j.io"}
-// console.log(extractCredentials("bolt+s://2ac9b0be.databases.neo4j.io")) // {"scheme":"bolt+s","host":"2ac9b0be.databases.neo4j.io"}
-// console.log(extractCredentials("2ac9b0be.databases.neo4j.io")) // {"scheme":"neo4j","host":"2ac9b0be.databases.neo4j.io"}
-// console.log(extractCredentials("2ac9b0be.databases.neo4j.io:1234")) // {"scheme":"neo4j","host":"2ac9b0be.databases.neo4j.io","port":"1234"}
-// console.log(extractCredentials("2ac9b0be.databases.neo4j.io:1234?database=foo")) // {"scheme":"neo4j","host":"2ac9b0be.databases.neo4j.io","port":"1234","database":"foo"}
-// console.log(extractCredentials("neo4j+s://user:pass@2ac9b0be.databases.neo4j.io:1234?database=foo")) // {"scheme":"neo4j+s","host":"2ac9b0be.databases.neo4j.io","port":"1234","username":"user","password":"pass","database":"foo"}
+// console.log(extractCredentials("neo4j+s://dbhash.databases.neo4j.io")) // {"scheme":"neo4j+s","host":"dbhash.databases.neo4j.io"}
+// console.log(extractCredentials("bolt+s://dbhash.databases.neo4j.io")) // {"scheme":"bolt+s","host":"dbhash.databases.neo4j.io"}
+// console.log(extractCredentials("dbhash.databases.neo4j.io")) // {"scheme":"neo4j","host":"dbhash.databases.neo4j.io"}
+// console.log(extractCredentials("dbhash.databases.neo4j.io:1234")) // {"scheme":"neo4j","host":"dbhash.databases.neo4j.io","port":"1234"}
+// console.log(extractCredentials("dbhash.databases.neo4j.io:1234?database=foo")) // {"scheme":"neo4j","host":"dbhash.databases.neo4j.io","port":"1234","database":"foo"}
+// console.log(extractCredentials("neo4j+s://user:pass@dbhash.databases.neo4j.io:1234?database=foo")) // {"scheme":"neo4j+s","host":"dbhash.databases.neo4j.io","port":"1234","username":"user","password":"pass","database":"foo"}
 // console.log(extractCredentials("wt")) // {"scheme":"neo4j","host":"wt"}
 // console.log(extractCredentials("1234")) // {"scheme":"neo4j","host":"1234"}
 // console.log(extractCredentials("127.0.0.1:1234")) // {"scheme":"neo4j","host":"127.0.0.1","port":"1234"}
@@ -93,4 +101,11 @@ function valueToNativeType(value: any) {
   }
 
   return value
+}
+
+export function getDriverForConnection(activeConnection: Connection) {
+  return neo4j.driver(
+    `${activeConnection.scheme}://${activeConnection.host}:${activeConnection.port}`,
+    neo4j.auth.basic(activeConnection.username, activeConnection.password)
+  )
 }

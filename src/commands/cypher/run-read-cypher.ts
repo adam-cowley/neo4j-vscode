@@ -1,9 +1,9 @@
-import { window, commands, ExtensionContext } from 'vscode'
-import neo4j from 'neo4j-driver'
+import { window, ExtensionContext } from 'vscode'
 import ConnectionManager from '../../connections/connection-manager.class'
 import { METHOD_READ } from '../../constants'
 import CypherRunner from '../../cypher/runner'
 import ParameterManager from '../../parameters/parameters.manager'
+import { getDriverForConnection } from '../../utils'
 
 export default async function runReadCypher(
   context: ExtensionContext,
@@ -23,12 +23,7 @@ export default async function runReadCypher(
       return
     }
 
-
-    // const driver = await activeConnection.getDriver()
-    const driver = neo4j.driver(
-      `${activeConnection.scheme}://${activeConnection.host}:${activeConnection.port}`,
-      neo4j.auth.basic(activeConnection.username, activeConnection.password)
-    )
+    const driver = getDriverForConnection(activeConnection)
     await driver.verifyConnectivity()
 
     const cypherRunner = new CypherRunner(context, parameters, driver)

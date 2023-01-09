@@ -1,11 +1,13 @@
 import * as path from 'path'
 import * as vscode from 'vscode'
 import INode from "../tree/inode.interface"
-import neo4j, { Driver, Transaction } from 'neo4j-driver'
+import { Driver, Transaction } from 'neo4j-driver'
 import Database from './database.class'
 import User from './user.class'
 import Label from './label.class'
 import Role from './role.class'
+import { getDriverForConnection } from '../utils'
+import { Connection, Scheme } from '../constants'
 
 export default class Instance implements INode {
 
@@ -13,15 +15,19 @@ export default class Instance implements INode {
   private error?: Error
 
   constructor(
-    private readonly id: string,
-    private readonly name: string,
-    private readonly scheme: string,
-    private readonly host: string,
-    private readonly port: string,
-    private readonly username: string,
-    private readonly password: string,
-    private readonly active: boolean
-  ) { }
+    public readonly id: string,
+    public readonly name: string,
+    public readonly scheme: Scheme,
+    public readonly host: string,
+    public readonly port: string,
+    public readonly username: string,
+    public readonly password: string,
+    public readonly active: boolean
+  ) {
+    // this.getDriver()
+    //   .then(driver => driver.verifyConnectivity())
+    //   .catch(e => this.error = e)
+  }
 
   async getTreeItem(): Promise<vscode.TreeItem> {
     const driver = await this.getDriver()
@@ -67,13 +73,24 @@ export default class Instance implements INode {
     }
   }
 
-  async getChildren(): Promise<INode[]> {
-    return []
-    // const driver = await this.getDriver();
+  async getDriver(): Promise<Driver> {
+    if ( !this.driver ) {
+      this.driver = getDriverForConnection(this satisfies Connection)
+    }
 
-    // if ( this.error ) {
-    //     return Promise.resolve([ new Label(this.error.message, 'error', path.join(__filename, '..', '..', '..', 'images', 'icons', 'alert.svg')) ]);
-    // }
+    return this.driver
+  }
+
+  async getChildren(): Promise<INode[]> {
+    if ( this.error ) {
+      return [ new Label(
+        this.error.message,
+        'error',
+        path.join(__filename, '..', '..', '..', 'images', 'icons', 'alert.svg')
+      ) ]
+    }
+
+    return []
 
     // const session = driver.session({ database: "system" });
     // const tx = session.beginTransaction();
@@ -88,14 +105,6 @@ export default class Instance implements INode {
     //         this.error = e;
     //         return [];
     //     });
-  }
-
-  async getDriver(): Promise<Driver> {
-    const driver = neo4j.driver(`${this.scheme}://${this.host}:${this.port}`, neo4j.auth.basic(this.username, this.password))
-    await driver.verifyConnectivity()
-      .catch(e => this.error = e)
-
-    return driver
   }
 
   getDatabases(tx: Transaction): Promise<INode[]> {
@@ -128,7 +137,12 @@ export default class Instance implements INode {
           row.get('suspended')
         ))
 
-        return new Label('Users', 'users', path.join(__filename, '..', '..', '..', 'images', 'icons', 'users.svg'), children)
+        return new Label(
+          'Users',
+          'users',
+          path.join(__filename, '..', '..', '..', 'images', 'icons', 'users.svg'),
+          children
+        )
       })
 
   }
@@ -153,7 +167,12 @@ export default class Instance implements INode {
 
         const children = Object.values(reduced)
 
-        return new Label('Roles', 'roles', path.join(__filename, '..', '..', '..', 'images', 'icons', 'roles.svg'), children)
+        return new Label(
+          'Roles',
+          'roles',
+          path.join(__filename, '..', '..', '..', 'images', 'icons', 'roles.svg'),
+          children
+        )
       })
   }
 }

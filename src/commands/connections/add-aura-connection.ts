@@ -9,7 +9,6 @@ export default async function addAuraConnection(
     prompt: "Copy and paste your Connection URI from the Aura Console",
     placeHolder: "eg. neo4j+s://[dbid].databases.neo4j.io",
     ignoreFocusOut: true,
-    value: 'neo4j+s://2ac9b0be.databases.neo4j.io'
   })
   if (!uri) { return }
 

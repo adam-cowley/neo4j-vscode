@@ -1,5 +1,8 @@
 import * as vscode from 'vscode'
 import { Connection, CONNECTIONS } from '../constants'
+import {
+  updateActiveConnectionStatusBarItem
+} from '../status/connection-status'
 import ConnectionTreeProvider from './connection-tree.provider'
 
 export default class ConnectionManager {
@@ -17,10 +20,18 @@ export default class ConnectionManager {
     return this.context.globalState.get(CONNECTIONS) || {}
   }
 
+  hasConnections(): boolean {
+    const state = this.getState()
+
+    return Object.keys(state).length > 0
+  }
+
   async updateState(state: Record<string, Connection>) {
     await this.context.globalState.update(CONNECTIONS, state)
 
     this.tree.refresh()
+
+    updateActiveConnectionStatusBarItem(this)
   }
 
   async add(connection: Connection): Promise<void> {

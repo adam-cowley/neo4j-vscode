@@ -4,6 +4,7 @@ import { connectionSubscriptions } from './commands/connections'
 import { parameterSubscriptions } from './commands/parameters'
 import ConnectionManager from './connections/connection-manager.class'
 import ParameterManager from './parameters/parameters.manager'
+import registerStatusBarSubscriptions from './status'
 
 export function activate(context: ExtensionContext) {
   // Connection Management
@@ -15,6 +16,9 @@ export function activate(context: ExtensionContext) {
 
   // Parameters
   parameterSubscriptions(context, parameters)
+
+  // Status Bar
+  registerStatusBarSubscriptions(context, connections)
 }
 
 export function deactivate() { }
