@@ -1,6 +1,6 @@
 {
   "name": "neo4j-vscode",
-  "displayName": "neo4j-vscode",
+  "displayName": "Neo4j",
   "description": "A Neo4j extension for VS Code",
   "homepage": "https://github.com/adam-cowley/neo4j-vscode",
   "icon": "images/logo/Neo4j-icon-color.png",
