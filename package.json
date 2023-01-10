@@ -3,7 +3,7 @@
   "displayName": "neo4j-vscode",
   "description": "A Neo4j extension for VS Code",
   "homepage": "https://github.com/adam-cowley/neo4j-vscode",
-  "icon": "images/icons/Neo4j-icon-color.png",
+  "icon": "images/logo/Neo4j-icon-color.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/adam-cowley/neo4j-vscode"
