@@ -6,6 +6,7 @@ The Neo4j VS Code Extension allows you to manage connections and run Cypher with
 
 ## Features
 
+* Cypher syntax highlighting
 * Manage Neo4j connections in the Neo4j Sidebar
 * Run Cypher statements in read or write transactions
 * Highlight individual Cypher statements in your code and run with
@@ -13,7 +14,7 @@ The Neo4j VS Code Extension allows you to manage connections and run Cypher with
 
 ## Roadmap
 
-* Built-in Cypher syntax highlighting and formatting
+* Built-in Cypher formatting
 * Better result handling
 * Open your connection in Workspace, Bloom, Browser and more...
 * More code snippets

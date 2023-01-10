@@ -37,6 +37,13 @@
     "onCommand:neo4j.removeParameter"
   ],
   "contributes": {
+    "grammars": [
+      {
+        "language": "cypher",
+        "scopeName": "source.cypher",
+        "path": "./cypher/cypher.tmLanguage"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
