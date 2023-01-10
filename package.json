@@ -2,6 +2,11 @@
   "name": "neo4j-vscode",
   "displayName": "neo4j-vscode",
   "description": "A Neo4j extension for VS Code",
+  "homepage": "https://github.com/adam-cowley/neo4j-vscode",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adam-cowley/neo4j-vscode"
+  },
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.74.0"
