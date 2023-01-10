@@ -2,7 +2,7 @@
   "name": "neo4j-vscode",
   "displayName": "neo4j-vscode",
   "description": "A Neo4j extension for VS Code",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -155,6 +155,7 @@
       }
     ]
   },
+  "preview": true,
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

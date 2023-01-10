@@ -21,5 +21,5 @@ export default async function verboseSetParameter(parameters: ParameterManager):
     {placeHolder: 'What type is this data?'}
   )
 
-  await parameters.set(key.trim(), value, type as ParameterType)
+  await parameters.set(key.trim(), value.trim(), type as ParameterType)
 }

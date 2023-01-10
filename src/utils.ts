@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
 import neo4j, {
   isDate,
   isDateTime,
@@ -5,7 +7,8 @@ import neo4j, {
   isInt,
   isLocalDateTime,
   isLocalTime,
-  isTime
+  isTime,
+  QueryResult
 } from "neo4j-driver"
 import { Connection, Scheme, SCHEME_NEO4J } from "./constants"
 
@@ -21,9 +24,9 @@ export function extractCredentials(uri: string): Connection | undefined {
 
   const [
     _full,
-    _full_scheme,
+    _fullScheme,
     scheme,
-    _scheme_start,
+    _schemeStart,
     _secure,
     _unknown,
     _userpassat,
@@ -108,4 +111,43 @@ export function getDriverForConnection(activeConnection: Connection) {
     `${activeConnection.scheme}://${activeConnection.host}:${activeConnection.port}`,
     neo4j.auth.basic(activeConnection.username, activeConnection.password)
   )
+}
+
+export function querySummary(result: QueryResult): string[] {
+  const rows = result.records.length
+  const counters = result.summary.counters
+  const output = []
+
+  // Streamed
+  if ( rows > 0 ) {
+    // Started streaming 1 records after 5 ms and completed after 10  ms.
+    output.push(
+      `Started streaming ${rows} record${rows === 1 ? '' : 's'} after ${result.summary.resultAvailableAfter}ms and completed after ${result.summary.resultConsumedAfter}ms.`
+    )
+  }
+
+  if ( counters.containsUpdates() ) {
+    const updates =  []
+
+    const updateCounts = counters.updates()
+
+    for (const key in updateCounts) {
+      const count = updateCounts[key]
+      if ( count > 0 ) {
+        const parts = key.split(/(?=[A-Z])/)
+        updates.push( `${count} ${parts.map(value => value.toLowerCase()).join(' ')}` )
+      }
+    }
+
+    if ( updates.length > 0) {
+      output.push(updates.join(' '))
+    }
+  }
+
+  if ( counters.containsSystemUpdates() ) {
+    output.push(`${counters.systemUpdates()} system updates.`)
+  }
+
+
+  return output
 }

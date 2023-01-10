@@ -1,13 +1,13 @@
 {
 	"MATCH": {
-		"prefix": "ma",
+		"prefix": "match",
 		"body": [
 			"MATCH (${1:n}:${2:Label})"
 		],
 		"description": "Match a Node with a label"
 	},
 	"MERGE": {
-		"prefix": "men",
+		"prefix": "merge",
 		"body": [
 			"MERGE (${1:n}:${2:Label} { ${3:id}: ${4:\\$${3}} })",
 			"${5:SET ${1}.${6:prop} = $${7:value}}}"
@@ -15,7 +15,7 @@
 		"description": "Match a Node with a label"
 	},
 	"CREATE": {
-		"prefix": "crn",
+		"prefix": "create",
 		"body": [
 			"CREATE (${1:n}:${2:Label} { ${3:id}: ${4:\\$${3}} })",
 			""
@@ -32,40 +32,40 @@
 	"Outgoing Relationship": {
 		"prefix": "out",
 		"body": [
-			"-[${1:r}:${2:TYPE})]->"
+			"-[${1:r}:${2:TYPE}]->"
 		],
 		"description": "Add an outgoing relationship to a pattern"
 	},
 	"Incoming Relationship": {
 		"prefix": "in",
 		"body": [
-			"<-[${1:r}:${2:TYPE})]-"
+			"<-[${1:r}:${2:TYPE}]-"
 		],
 		"description": "Add an incoming relationship to a pattern"
 	},
 	"WITH": {
-		"prefix": "wi",
+		"prefix": "with",
 		"body": [
 			"WITH ${1:*}"
 		],
 		"description": "Add flow control step using WITH"
 	},
 	"Return": {
-		"prefix": "ret",
+		"prefix": "return",
 		"body": [
 			"RETURN ${1:*}"
 		],
 		"description": "Return something"
 	},
 	"Delete": {
-		"prefix": "del",
+		"prefix": "delete",
 		"body": [
 			"RETURN ${1:n}"
 		],
 		"description": "Delete something"
 	},
 	"Set": {
-		"prefix": "del",
+		"prefix": "set",
 		"body": [
 			"SET ${1:n}.${2:key} = ${3:$$value}"
 		],

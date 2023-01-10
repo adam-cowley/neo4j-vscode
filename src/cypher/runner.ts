@@ -4,6 +4,7 @@ import { Method } from '../constants'
 import OutputChannel from '../output'
 import ResultWebView from '../result'
 import ParameterProvider from '../parameters/parameters.manager'
+import { querySummary } from '../utils'
 
 
 export default class CypherRunner {
@@ -42,9 +43,17 @@ export default class CypherRunner {
         )
       )
 
+      // Query Summary
+      for ( const value of querySummary(res)) {
+        OutputChannel.append(value)
+      }
+
       ResultWebView.show(res, cypher)
     }
-    catch (e) {
+    catch (e: any) {
+      OutputChannel.append('Error Running Query')
+      OutputChannel.append(e.message)
+
       console.error(e)
     }
     finally {

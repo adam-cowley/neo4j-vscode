@@ -25,7 +25,7 @@ export default async function setParameter(parameters: ParameterManager): Promis
       placeHolder: 'What type is this data?'
     })
 
-    await parameters.set(key, value, type as ParameterType)
+    await parameters.set(key, value.trim(), type as ParameterType)
 
     return
   }
