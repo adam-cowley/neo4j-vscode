@@ -3,6 +3,7 @@
   "displayName": "neo4j-vscode",
   "description": "A Neo4j extension for VS Code",
   "homepage": "https://github.com/adam-cowley/neo4j-vscode",
+  "icon": "images/icons/Neo4j-icon-color.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/adam-cowley/neo4j-vscode"
@@ -26,15 +27,15 @@
   ],
   "main": "./out/extension.js",
   "activationEvents": [
-		"onCommand:neo4j.addConnection",
-		"onCommand:neo4j.addAuraConnection",
-		"onCommand:neo4j.removeConnection",
-		"onCommand:neo4j.clearConnections",
-		"onCommand:neo4j.addLocalhost",
-		"onCommand:neo4j.refresh",
-		"onCommand:neo4j.setParameter",
-		"onCommand:neo4j.removeParameter"
-	],
+    "onCommand:neo4j.addConnection",
+    "onCommand:neo4j.addAuraConnection",
+    "onCommand:neo4j.removeConnection",
+    "onCommand:neo4j.clearConnections",
+    "onCommand:neo4j.addLocalhost",
+    "onCommand:neo4j.refresh",
+    "onCommand:neo4j.setParameter",
+    "onCommand:neo4j.removeParameter"
+  ],
   "contributes": {
     "viewsContainers": {
       "activitybar": [
@@ -154,16 +155,39 @@
         "mac": "ctrl+alt+cmd+space"
       }
     ],
+    "languages": [
+      {
+        "id": "cypher",
+        "aliases": [
+          "Cypher Query Language",
+          "cypher"
+        ],
+        "extensions": [
+          ".cypher",
+          ".cql",
+          ".cy",
+          ".cyp"
+        ],
+        "configuration": "./cypher/cypher.configuration.json",
+        "icon": {
+          "dark": "images/logo-neo4j.png",
+          "light": "images/logo-neo4j.png"
+        }
+      }
+    ],
     "snippets": [
       {
         "language": "cypher",
-        "path": "./snippets/cypher.json"
+        "path": "./cypher/cypher.snippets.json"
       }
     ]
   },
   "preview": true,
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
@@ -178,6 +202,7 @@
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "@vscode/test-electron": "^2.2.0",
+    "esbuild": "^0.16.16",
     "eslint": "^8.28.0",
     "glob": "^8.0.3",
     "mocha": "^10.1.0",
