@@ -11,6 +11,7 @@
   "engines": {
     "vscode": "^1.74.0"
   },
+  "publisher": "adamcowley",
   "categories": [
     "Programming Languages",
     "Snippets",
