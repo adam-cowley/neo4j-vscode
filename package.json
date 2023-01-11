@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/adam-cowley/neo4j-vscode"
   },
-  "version": "0.1.2",
+  "version": "0.1.3",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -138,8 +138,8 @@
         "command": "neo4j.removeParameter",
         "title": "Neo4j: Remove Parameter",
         "icon": {
-         "dark": "images/icons/remove-dark.svg",
-         "light": "images/icons/remove-light.svg"
+          "dark": "images/icons/remove-dark.svg",
+          "light": "images/icons/remove-light.svg"
         }
       },
       {
