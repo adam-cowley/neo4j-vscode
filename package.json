@@ -122,6 +122,10 @@
         "title": "Neo4j: Remove Parameter"
       },
       {
+        "command": "neo4j.clearParameters",
+        "title": "Neo4j: Clear all Parameters"
+      },
+      {
         "command": "neo4j.runReadCypher",
         "title": "Neo4j: Run Cypher Statement in a Read Transaction"
       },

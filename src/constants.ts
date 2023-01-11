@@ -46,7 +46,6 @@ export const parameterTypes = [
 
 export type ParameterType = typeof parameterTypes[number]
 
-
 export const METHOD_READ = 'executeRead'
 export const METHOD_WRITE = 'executeWrite'
 

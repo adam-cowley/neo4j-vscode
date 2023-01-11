@@ -31,12 +31,11 @@ export async function updateActiveConnectionStatusBarItem(
     return
   }
 
-
   const active = await connections.getActive()
 
   activeConnectionStatusBarItem.command = 'neo4j.setActiveConnection'
 
   activeConnectionStatusBarItem.text = active
-    ? `${active.scheme}://${active.username}@${active.host}:${active.port}`
-    : 'No Active Neo4j Connection'
+    ? `$(database) ${active.scheme}://${active.username}@${active.host}:${active.port}`
+    : '$(database) No Active Neo4j Connection'
 }

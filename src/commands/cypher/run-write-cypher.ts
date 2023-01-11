@@ -1,6 +1,6 @@
 import { ExtensionContext, window } from 'vscode'
 import ConnectionManager from '../../connections/connection-manager.class'
-import { METHOD_READ } from '../../constants'
+import { METHOD_WRITE } from '../../constants'
 import CypherRunner from '../../cypher/runner'
 import ParameterManager from '../../parameters/parameters.manager'
 import { getDriverForConnection } from '../../utils'
@@ -40,7 +40,7 @@ export default async function runWriteCypher(
     if (selections.length === 0) {
       const documentText = editor.document.getText()
 
-      await cypherRunner.run(documentText, METHOD_READ)
+      await cypherRunner.run(documentText, METHOD_WRITE)
 
       return
     }
@@ -49,7 +49,7 @@ export default async function runWriteCypher(
     await Promise.all(selections.map(async (selection) => {
       const documentText = editor.document.getText(selection)
 
-      await cypherRunner.run(documentText, METHOD_READ)
+      await cypherRunner.run(documentText, METHOD_WRITE)
     }))
   }
 }

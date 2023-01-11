@@ -5,7 +5,7 @@ import OutputChannel from '../output'
 import ResultWebView from '../result'
 import ParameterProvider from '../parameters/parameters.manager'
 import { querySummary } from '../utils'
-
+import setParameterValue from '../commands/parameters/set-parameter-value'
 
 export default class CypherRunner {
 
@@ -16,8 +16,10 @@ export default class CypherRunner {
   ) {}
 
   async run(input: string, method: Method): Promise<void> {
+    // Split text on ; and a new line
     const queries = input.split(';\n')
 
+    // Run individual queries
     for (const query of queries) {
       if (query && query !== '') {
         await this.runSingle(query.trim(), method)
@@ -29,6 +31,18 @@ export default class CypherRunner {
     const session = this.driver.session()
 
     try {
+      // Detect Parameters
+      const parameters = cypher.match(/\$([a-z0-9_]+)/g)
+
+      if ( parameters ) {
+        for (const parameter of parameters) {
+          if ( !this.parameters.has(parameter.substring(1)) ) {
+            await setParameterValue(this.parameters, parameter.substring(1))
+          }
+        }
+      }
+
+      // Get parameter list
       const params = await this.parameters.asParameters()
 
       OutputChannel.append('--')
@@ -53,6 +67,7 @@ export default class CypherRunner {
     catch (e: any) {
       OutputChannel.append('Error Running Query')
       OutputChannel.append(e.message)
+      OutputChannel.show()
 
       console.error(e)
     }

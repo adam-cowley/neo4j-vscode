@@ -2,8 +2,6 @@
 
 All notable changes to the "neo4j-vscode" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [0.1.2]
 
-## [Unreleased]
-
-- Initial release
+- You will now be prompted if you mention any parameters in a query that aren't set in your environment.

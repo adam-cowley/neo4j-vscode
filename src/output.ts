@@ -7,4 +7,8 @@ export default class OutputChannel {
     // OutputChannel.channel.show(true);
     OutputChannel.channel.appendLine(value)
   }
+
+  public static show() {
+    OutputChannel.channel.show(true)
+  }
 }

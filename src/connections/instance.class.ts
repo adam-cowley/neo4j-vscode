@@ -38,6 +38,8 @@ export default class Instance implements INode {
 
     if (this.host.endsWith('.neo4j.io')) {
       icon = 'database-aura.svg'
+
+      edition = ` (aura)`
     }
     else if (this.error) {
       icon = 'alert.svg'

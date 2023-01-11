@@ -1,6 +1,14 @@
 import { int } from 'neo4j-driver'
 import * as vscode from 'vscode'
-import { PARAMETERS, ParameterType, PARAMETER_TYPE_FLOAT, PARAMETER_TYPE_INT, PARAMETER_TYPE_NULL, PARAMETER_TYPE_OBJECT, PARAMETER_TYPE_STRING } from '../constants'
+import {
+  PARAMETERS,
+  ParameterType,
+  PARAMETER_TYPE_FLOAT,
+  PARAMETER_TYPE_INT,
+  PARAMETER_TYPE_NULL,
+  PARAMETER_TYPE_OBJECT,
+  PARAMETER_TYPE_STRING,
+} from '../constants'
 import ParameterTreeProvider from './parameter-tree.provider'
 
 export interface Parameter {
@@ -39,6 +47,16 @@ export default class ParameterManager {
 
   getState(): Record<string, Parameter> {
     return this.context.globalState.get(PARAMETERS) || {}
+  }
+
+  has(key: string): boolean {
+    const state = this.getState()
+
+    return state.hasOwnProperty(key)
+  }
+
+  clear(): Promise<void> {
+    return this.updateState({})
   }
 
   async updateState(state: Record<string, Parameter>) {
