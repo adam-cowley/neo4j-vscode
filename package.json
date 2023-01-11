@@ -181,8 +181,8 @@
         ],
         "configuration": "./cypher/cypher.configuration.json",
         "icon": {
-          "dark": "images/logo-neo4j.png",
-          "light": "images/logo-neo4j.png"
+          "dark": "images/logo/Neo4j-icon-white.png",
+          "light": "images/logo/Neo4j-icon-color.png"
         }
       }
     ],
