@@ -1,0 +1,13 @@
+
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="pencil-2" stroke="#000000">
+            <polygon id="Shape" points="7 21.5 0.5 23.5 2.5 17 15.33 4.169 19.83 8.669"></polygon>
+            <path d="M15.33,4.169 L18.416,1.083 C19.1985865,0.306077203 20.4614135,0.306077203 21.244,1.083 L22.916,2.755 C23.6967639,3.5359997 23.6967639,4.8020003 22.916,5.583 L19.83,8.669" id="Shape"></path>
+            <line x1="17.58" y1="6.419" x2="6" y2="18" id="Shape"></line>
+            <polyline id="Shape" points="2.5 17 3.5 18 6 18 6 20.5 7 21.5"></polyline>
+            <line x1="1.5" y1="20.5" x2="3.5" y2="22.5" id="Shape"></line>
+            <line x1="16.83" y1="2.669" x2="21.33" y2="7.169" id="Shape"></line>
+        </g>
+    </g>
+</svg>

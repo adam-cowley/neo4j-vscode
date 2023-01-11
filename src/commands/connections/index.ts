@@ -1,5 +1,6 @@
 import { window, commands, ExtensionContext } from "vscode"
 import ConnectionManager from "../../connections/connection-manager.class"
+import Instance from "../../connections/instance.class"
 import ParameterManager from "../../parameters/parameters.manager"
 import runReadCypher from "../cypher/run-read-cypher"
 import runWriteCypher from "../cypher/run-write-cypher"
@@ -68,7 +69,7 @@ export function connectionSubscriptions(
   context.subscriptions.push(
     commands.registerCommand(
       'neo4j.setActiveConnection',
-      () => setActiveConnection(connections)
+      (connection?: Instance) => setActiveConnection(connections, connection)
     )
   )
 

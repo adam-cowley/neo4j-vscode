@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
+import { join } from 'path'
 import neo4j, {
   isDate,
   isDateTime,
@@ -150,4 +151,22 @@ export function querySummary(result: QueryResult): string[] {
 
 
   return output
+}
+
+export function iconPath(filename: string): { light: string, dark: string} {
+  console.log(filename, {light: join(
+    __filename, '..', 'images', 'icons', `${filename}-light.svg`
+  ),
+  dark: join(
+    __filename, '..', 'images', 'icons', `${filename}-dark.svg`
+  ),})
+
+  return {
+    light: join(
+      __filename, '..', '..', 'images', 'icons', `${filename}-light.svg`
+    ),
+    dark: join(
+      __filename, '..', '..', 'images', 'icons', `${filename}-dark.svg`
+    ),
+  }
 }

@@ -1,0 +1,10 @@
+
+<svg width="24px" height="26px" viewBox="0 0 24 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="currency-dollar" transform="translate(0.000000, 1.000000)" stroke="#ccc">
+            <path d="M16,3.533 L11.712,3.533 C9.59927754,3.59666988 7.93776669,5.36023474 8,7.473 C7.98163352,8.93754854 8.77114007,10.2932397 10.054,11 L13.954,13.072 C15.2312197,13.7805039 16.0168595,15.1325262 16,16.593 C16.0622563,18.7042507 14.4031424,20.4671712 12.292,20.533 L8,20.533" id="Shape"></path>
+            <line x1="11.504" y1="20.533" x2="11.504" y2="23.533" id="Shape"></line>
+            <line x1="13.504" y1="0.467" x2="13.504" y2="3.533" id="Shape"></line>
+        </g>
+    </g>
+</svg>

@@ -1,14 +1,9 @@
 import { window } from 'vscode'
 import ConnectionManager from "../../connections/connection-manager.class"
-import { YES } from "../../constants"
+import { confirm } from '../confirm'
 
 export default async function clearConnections(connections: ConnectionManager) {
-  const confirm = await window.showQuickPick(
-    [YES, 'No'],
-    { placeHolder: 'Are you sure you would like to clear all connections?' }
-  )
-
-  if (confirm === YES) {
+  if ( await confirm('Are you sure you would like to clear all connections?') ) {
     await connections.clear()
 
     window.showInformationMessage('Databases cleared')

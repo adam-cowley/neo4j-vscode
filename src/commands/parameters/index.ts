@@ -1,8 +1,10 @@
 import { window, commands, ExtensionContext } from "vscode"
+import ParameterTreeItem from "../../parameters/parameter.tree-item"
 import ParameterManager from "../../parameters/parameters.manager"
 import clearParameters from "./clear-parameters"
 import removeParameter from "./remove-parameter"
 import setParameter from "./set-parameter"
+import setParameterValue from "./set-parameter-value"
 
 export function parameterSubscriptions(
   context: ExtensionContext,
@@ -25,7 +27,14 @@ export function parameterSubscriptions(
   context.subscriptions.push(
     commands.registerCommand(
       'neo4j.removeParameter',
-      () => removeParameter(parameters)
+      (selected: ParameterTreeItem) => removeParameter(parameters, selected)
+    )
+  )
+
+  context.subscriptions.push(
+    commands.registerCommand(
+      'neo4j.setParameterValue',
+      (selected: ParameterTreeItem) => setParameterValue(parameters, selected.getKey())
     )
   )
 

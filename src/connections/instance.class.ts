@@ -1,4 +1,3 @@
-import * as path from 'path'
 import * as vscode from 'vscode'
 import INode from "../tree/inode.interface"
 import { Driver, Transaction } from 'neo4j-driver'
@@ -6,7 +5,7 @@ import Database from './database.class'
 import User from './user.class'
 import Label from './label.class'
 import Role from './role.class'
-import { getDriverForConnection } from '../utils'
+import { getDriverForConnection, iconPath } from '../utils'
 import { Connection, Scheme } from '../constants'
 
 export default class Instance implements INode {
@@ -33,16 +32,16 @@ export default class Instance implements INode {
     const driver = await this.getDriver()
     const session = driver.session()
 
-    let icon = 'database.svg'
+    let icon = 'database'
     let edition = ''
 
     if (this.host.endsWith('.neo4j.io')) {
-      icon = 'database-aura.svg'
+      icon = 'database-aura'
 
       edition = ` (aura)`
     }
     else if (this.error) {
-      icon = 'alert.svg'
+      icon = 'alert'
     }
     else {
       try {
@@ -54,11 +53,11 @@ export default class Instance implements INode {
         const versions = res.records[0].get('versions')
 
         if (versions[0].includes('aura')) {
-          icon = 'database-aura.svg'
+          icon = 'database-aura'
         }
       }
-      catch (e) {
-        console.error(e)
+      catch (e: any) {
+        this.error = e
       }
 
       await session.close()
@@ -71,7 +70,13 @@ export default class Instance implements INode {
       label: `${this.name || this.id}${edition}${active}`,
       collapsibleState: vscode.TreeItemCollapsibleState.None,
       contextValue: "connection",
-      iconPath: path.join(__filename, '..', '..', '..', 'images', 'icons', icon)
+      iconPath: iconPath(icon),
+      command: {
+        title: 'Set as Active Connection',
+        command: 'neo4j.setActiveConnection',
+        tooltip: `Set ${this.id} as the Active Connection`,
+        arguments: [ this ],
+      }
     }
   }
 
@@ -88,7 +93,7 @@ export default class Instance implements INode {
       return [ new Label(
         this.error.message,
         'error',
-        path.join(__filename, '..', '..', '..', 'images', 'icons', 'alert.svg')
+        'alert'
       ) ]
     }
 
@@ -142,7 +147,7 @@ export default class Instance implements INode {
         return new Label(
           'Users',
           'users',
-          path.join(__filename, '..', '..', '..', 'images', 'icons', 'users.svg'),
+          'users',
           children
         )
       })
@@ -172,7 +177,7 @@ export default class Instance implements INode {
         return new Label(
           'Roles',
           'roles',
-          path.join(__filename, '..', '..', '..', 'images', 'icons', 'roles.svg'),
+          'roles',
           children
         )
       })

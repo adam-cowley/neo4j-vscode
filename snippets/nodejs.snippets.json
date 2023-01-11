@@ -1,0 +1,97 @@
+{
+	"Import": {
+		"prefix": "neoimport",
+		"body": [
+			"import neo4j from 'neo4j-driver'"
+		],
+		"description": "Import the neo4j dependency"
+    },
+	"Create Driver": {
+		"prefix": "neodriver",
+		"body": [
+			"const driver = neo4j.driver(",
+            "\t${1:'neo4j://localhost:7687'},",
+            "\tneo4j.auth.basic(${2:'${3:neo4j}'}, ${4:'${5:neo}'})",
+            ")",
+            ""
+		],
+		"description": "Create a new Driver instance"
+    },
+	"Create Driver from Env": {
+		"prefix": "neodriverenv",
+		"body": [
+            "import neo4j from 'neo4j-driver'",
+            "",
+            "const { NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD } = process.env",
+            "",
+			"const driver = neo4j.driver(",
+            "\tNEO4J_URI,",
+            "\tneo4j.auth.basic(NEO4J_USERNAME, NEO4J_PASSWORD)",
+            ")",
+            ""
+		],
+		"description": "Create a new Driver instance using process.env"
+    },
+    "Read Transaction": {
+        "prefix": "neoread",
+        "body": [
+            "const session = driver.session()",
+            "",
+            "try {",
+            "\t// Execute Cypher in a Read Transaction",
+            "\tconst res = await session.executeRead(",
+            "\t\ttx => tx.run(",
+            "\t\t\t`${1:MATCH (p:Person { name: \\$${2:name} \\} ) RETURN p}`,",
+            "\t\t\t{ ${2}: ${3:'Tom Hanks'} \\}",
+            "\t\t)",
+            "\t)",
+            "",
+            "\t${4:// Process Results",
+            "\tconst people = res.records.map(",
+            "\t\trow => row.toObject()",
+            "\t)",
+            "",
+            "\tconsole.log(people)}",
+            "\\}",
+            "${5:catch (e) {",
+            "\t${6:// Handle Error}",
+            "\\}}",
+            "finally {",
+            "\t// Close the session",
+            "\tawait session.close()",
+            "}",
+            ""
+        ]
+    },
+    "Write Transaction": {
+        "prefix": "neowrite",
+        "body": [
+            "const session = driver.session()",
+            "",
+            "try {",
+            "\t// Execute Cypher in a Write Transaction",
+            "\tconst res = await session.executeWrite(",
+            "\t\ttx => tx.run(",
+            "\t\t\t`${1:MERGE (p:Person { name: \\$${2:name} \\} ) RETURN p}`,",
+            "\t\t\t{ ${2}: ${3:'Tom Hanks'} \\}",
+            "\t\t)",
+            "\t)",
+            "",
+            "\t${4:// Process Results",
+            "\tconst people = res.records.map(",
+            "\t\trow => row.toObject()",
+            "\t)",
+            "",
+            "\tconsole.log(people)}",
+            "\\}",
+            "${5:catch (e) {",
+            "\t${6:// Handle Error}",
+            "\\}}",
+            "finally {",
+            "\t// Close the session",
+            "\tawait session.close()",
+            "}",
+            ""
+        ]
+    }
+}

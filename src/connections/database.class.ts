@@ -1,5 +1,3 @@
-import * as path from 'path'
-import * as vscode from 'vscode'
 import INode from "../tree/inode.interface"
 
 
@@ -18,9 +16,7 @@ export default class Database implements INode {
     const status = this.currentStatus !== 'online' ? ` (${this.currentStatus})` : ''
     return {
       label: `${this.name}${status}`,
-      contextValue: "connection",
-      // collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
-      // iconPath: path.join(__filename, '..', '..', '..', 'images', this.currentStatus === 'offline' ? 'database-offline.svg' : 'database.svg')
+      contextValue: "database",
     }
   }
 

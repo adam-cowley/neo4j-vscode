@@ -34,7 +34,8 @@
     "onCommand:neo4j.addLocalhost",
     "onCommand:neo4j.refresh",
     "onCommand:neo4j.setParameter",
-    "onCommand:neo4j.removeParameter"
+    "onCommand:neo4j.removeParameter",
+    "onCommand:neo4j.setParameterValue"
   ],
   "contributes": {
     "grammars": [
@@ -47,14 +48,14 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "neo4j-explorer",
+          "id": "neo4j",
           "title": "Neo4j",
           "icon": "images/logo/Neo4j-icon-color.png"
         }
       ]
     },
     "views": {
-      "neo4j-explorer": [
+      "neo4j": [
         {
           "id": "neo4j.connections",
           "name": "Databases"
@@ -95,11 +96,15 @@
       },
       {
         "command": "neo4j.removeConnection",
-        "title": "Neo4j: Remove Connection"
+        "title": "Neo4j: Remove Connection",
+        "icon": {
+          "dark": "images/icons/remove-dark.svg",
+          "light": "images/icons/remove-light.svg"
+        }
       },
       {
         "command": "neo4j.clearConnections",
-        "title": "Neo4j: Clear Connections"
+        "title": "Neo4j: Remove all Connections"
       },
       {
         "command": "neo4j.addLocalhost",
@@ -107,7 +112,11 @@
       },
       {
         "command": "neo4j.setActiveConnection",
-        "title": "Neo4j: Set Active Connection"
+        "title": "Neo4j: Set Active Connection",
+        "icon": {
+          "dark": "images/icons/set-active-dark.svg",
+          "light": "images/icons/set-active-light.svg"
+        }
       },
       {
         "command": "neo4j.refresh",
@@ -118,12 +127,24 @@
         "title": "Neo4j: Set Parameter"
       },
       {
+        "command": "neo4j.setParameterValue",
+        "title": "Neo4j: Set Parameter Value",
+        "icon": {
+          "dark": "images/icons/edit-dark.svg",
+          "light": "images/icons/edit-light.svg"
+        }
+      },
+      {
         "command": "neo4j.removeParameter",
-        "title": "Neo4j: Remove Parameter"
+        "title": "Neo4j: Remove Parameter",
+        "icon": {
+         "dark": "images/icons/remove-dark.svg",
+         "light": "images/icons/remove-light.svg"
+        }
       },
       {
         "command": "neo4j.clearParameters",
-        "title": "Neo4j: Clear all Parameters"
+        "title": "Neo4j: Remove all Parameters"
       },
       {
         "command": "neo4j.runReadCypher",
@@ -190,8 +211,44 @@
       {
         "language": "cypher",
         "path": "./cypher/cypher.snippets.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/nodejs.snippets.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/typescript.snippets.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/nodejs.snippets.json"
       }
-    ]
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "when": "view == neo4j.connections && viewItem == connection",
+          "command": "neo4j.removeConnection",
+          "group": "inline"
+        },
+        {
+          "when": "view == neo4j.connections && viewItem == connection",
+          "command": "neo4j.setActiveConnection",
+          "group": "inline"
+        },
+        {
+          "when": "view == neo4j.parameters && viewItem == parameter",
+          "command": "neo4j.setParameterValue",
+          "group": "inline"
+        },
+        {
+          "when": "view == neo4j.parameters && viewItem == parameter",
+          "command": "neo4j.removeParameter",
+          "group": "inline"
+        }
+      ]
+    }
   },
   "preview": true,
   "scripts": {

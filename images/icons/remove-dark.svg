@@ -1,0 +1,10 @@
+
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="remove-circle" stroke="#ccc">
+            <line x1="7" y1="16.999" x2="17" y2="6.999" id="Shape"></line>
+            <line x1="17" y1="16.999" x2="7" y2="6.999" id="Shape"></line>
+            <circle id="Oval" cx="12" cy="11.999" r="11.5"></circle>
+        </g>
+    </g>
+</svg>
