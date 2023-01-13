@@ -213,6 +213,18 @@
         "path": "./cypher/cypher.snippets.json"
       },
       {
+        "language": "cypher",
+        "path": "./cypher/cypher-db-admin.snippets.json"
+      },
+      {
+        "language": "cypher",
+        "path": "./cypher/cypher-role-admin.snippets.json"
+      },
+      {
+        "language": "cypher",
+        "path": "./cypher/cypher-user-admin.snippets.json"
+      },
+      {
         "language": "javascript",
         "path": "./snippets/nodejs.snippets.json"
       },
@@ -223,6 +235,10 @@
       {
         "language": "typescript",
         "path": "./snippets/nodejs.snippets.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python.snippets.json"
       }
     ],
     "menus": {

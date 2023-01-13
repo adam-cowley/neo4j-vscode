@@ -1,0 +1,76 @@
+{
+	"Import": {
+		"prefix": "neoimport",
+		"body": [
+			"from neo4j import GraphDatabase"
+		],
+		"description": "Import the neo4j dependency"
+    },
+	"Create Driver": {
+		"prefix": "neodriver",
+		"body": [
+			"driver = GraphDatabase.driver(",
+            "\t${1:'neo4j://localhost:7687'},",
+            "\tauth=(${2:'${3:neo4j}'}, ${4:'${5:neo}'})",
+            ")",
+            ""
+		],
+		"description": "Create a new Driver instance"
+    },
+    "Read Transaction": {
+        "prefix": "neoread",
+        "body": [
+            "with driver.session() as session:",
+            "\t# Define the unit of work",
+            "\tdef ${1:find_person}(tx, ${2:name}):",
+            "\t\tresult = tx.run(\"\"\"",
+            "\t\t\t${3:MATCH (p:Person { name: \\$${2} \\} ) RETURN p}",
+            "\t\t\"\"\", ${2}=${2})",
+            "\t\trecords = list(result)",
+            "\t\tsummary = result.consume()",
+            "\t\treturn records, summary",
+            "",
+            "\t# Execute the unit of work in a read transaction",
+            "\trecords, summary = session.execute_read(${1}, ${4:${2}=\"Tom Hanks\"})",
+            "",
+            "\t${5:# Summary information",
+            "\tprint(\"The query `{query\\}` returned {records_count\\} records in {time\\} ms.\".format(",
+            "\t\tquery=summary.query, records_count=len(records),",
+            "\t\ttime=summary.result_available_after,",
+            "\t))}",
+            "",
+            "\t${6:# Loop through results and do something with them",
+            "\tfor person in records:",
+            "\t\tprint(person)}",
+            ""
+        ]
+    },
+    "Write Transaction": {
+        "prefix": "neowrite",
+        "body": [
+            "with driver.session() as session:",
+            "\t# Define the unit of work",
+            "\tdef ${1:find_person}(tx, ${2:name}):",
+            "\t\tresult = tx.run(\"\"\"",
+            "\t\t\t${3:CREATE (p:Person { name: \\$${2} \\} ) RETURN p}",
+            "\t\t\"\"\", ${2}=${2})",
+            "\t\trecords = list(result)",
+            "\t\tsummary = result.consume()",
+            "\t\treturn records, summary",
+            "",
+            "\t# Execute the unit of work in a write transaction",
+            "\trecords, summary = session.execute_write(${1}, ${4:${2}=\"Tom Hanks\"})",
+            "",
+            "\t${5:# Summary information",
+            "\tprint(\"The query `{query\\}` returned {records_count\\} records in {time\\} ms.\".format(",
+            "\t\tquery=summary.query, records_count=len(records),",
+            "\t\ttime=summary.result_available_after,",
+            "\t))}",
+            "",
+            "\t${6:# Loop through results and do something with them",
+            "\tfor person in records:",
+            "\t\tprint(person)}",
+            ""
+        ]
+    }
+}

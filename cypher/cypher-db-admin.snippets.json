@@ -1,0 +1,139 @@
+{
+    "Create Database": {
+		"prefix": "createdatabase",
+		"body": [
+			"CREATE DATABASE ${1:name} ${2:IF NOT EXISTS}",
+			"${3:TOPOLOGY ${4:3} PRIMARIES ${5:2} SECONDARIES}",
+			"${6:OPTIONS { ${7:key: value} \\}}",
+			"${8:WAIT ${9:10} SECONDS}",
+			""
+		],
+		"description": "Create and start a new database (Enterprise only)"
+	},
+	"Create Composite Database": {
+		"prefix": "createcompositedatabase",
+		"body": [
+			"CREATE COMPOSITE DATABASE ${1:inventory} ${2:IF NOT EXISTS}",
+			""
+		],
+		"description": "Composite databases do not contain data, but they reference to other database that can be queried together through their constituent aliases."
+	},
+	"Drop Database": {
+		"prefix": "dropdatabase",
+		"body": [
+			"DROP DATABASE ${1:name}",
+			"${2:IF EXISTS}",
+			"${3:DUMP DATA}",
+			"${4:WAIT ${5:10} SECONDS}"
+		],
+		"description": "Drop (remove) an existing database"
+	},
+	"Alter Database": {
+		"prefix": "alterdatabase",
+		"body": [
+			"ALTER DATABASE ${1:name}${2: IF EXISTS}",
+			"${3:SET ACCESS ${4:READ ONLY}}",
+			"${5:SET TOPOLOGY ${6:3 PRIMARIES 2 SECONDARIES}}"
+		],
+		"description": "Alter (motify) an existing database"
+	},
+	"Show Database": {
+		"prefix": "showdb",
+		"body": "SHOW DATABASE ${1:name}",
+		"description": "Show the status of a specific database."
+	},
+	"Show Default Database": {
+		"prefix": "showdefaultdb",
+		"body": "SHOW DEFAULT DATABASE",
+		"description": "Show the status of the default database."
+	},
+	"Show Home Database": {
+		"prefix": "showhomedb",
+		"body": "SHOW HOME DATABASE",
+		"description": "Show the status of the home database configured for the current user."
+	},
+	"Show Databases": {
+		"prefix": "showdbs",
+		"body": "SHOW DATABASES",
+		"description": "Show the status of a specific database."
+	},
+	"Start Database": {
+		"prefix": "startdb",
+		"body": [
+			"START DATABASE ${1:name}",
+			"${2:WAIT ${3:5} SECONDS}"
+		],
+		"description": "Start a database that has been stopped."
+	},
+	"Stop Database": {
+		"prefix": "stopdb",
+		"body": [
+			"STOP DATABASE ${1:name}",
+			"${2:WAIT ${3:5} SECONDS}"
+		],
+		"description": "Shut down a database."
+	},
+	"Show Alias": {
+		"prefix": "showalias",
+		"body": [
+			"SHOW ALIAS ${1:name} FOR DATABASES"
+		],
+		"description": "Show Database Alias"
+	},
+	"Show Aliases": {
+		"prefix": "showaliases",
+		"body": [
+			"SHOW ALIASES FOR DATABASE"
+		],
+		"description": "Show all alias for database"
+	},
+	"Create Local Alias": {
+		"prefix": "createalias",
+		"body": [
+			"CREATE${1: OR REPLACE} ALIAS ${2:name}${3: IF NOT EXISTS} FOR DATABASE ${4:targetName}",
+			"${6:PROPERTIES { ${7:key: value} \\}}",
+			""
+		],
+		"description": "Create a local alias"
+	},
+	"Create Remote Alias": {
+		"prefix": "createremotealias",
+		"body": [
+			"CREATE ${1:OR REPLACE} ALIAS ${2:name}${3: IF NOT EXISTS} FOR DATABASE ${4:targetName}",
+			"AT '${5:neo4j://dbhash.databases.neo4.io:7687}' USER ${6:username} PASSWORD ${7:'password'}",
+			"${8:DRIVER { ${9:key: value} \\}}",
+			"${10:PROPERTIES { ${11:key: value} \\}}",
+			""
+		],
+		"description": "Create an alias to a remote database"
+	},
+	"Alter Local Alias": {
+		"prefix": "alteralias",
+		"body": [
+			"ALTER ALIAS ${2:name}${3: IF EXISTS} SET DATABASE",
+			"TARGET ${4:targetName}",
+			"${6:PROPERTIES { ${7:key: value} \\}}",
+			""
+		],
+		"description": "Alter a local alias"
+	},
+	"Alter Remote Alias": {
+		"prefix": "alterremotealias",
+		"body": [
+			"ALTER ALIAS ${2:name}${3: IF EXISTS} SET DATABASE",
+			"TARGET ${4:targetName}",
+			"AT '${5:neo4j://dbhash.databases.neo4.io:7687'} USER ${6:username} PASSWORD ${7:'password'}",
+			"${8:DRIVER { ${9:key: value} \\}}",
+			"${10:PROPERTIES { ${11:key: value} \\}}",
+			""
+		],
+		"description": "Create an alias to a remote database"
+	},
+	"Drop Alias": {
+		"prefix": "dropalias",
+		"body": [
+			"DROP ALIAS${1: IF EXISTS} ${2:name}"
+		],
+		"description": "Drop (remove) an existing database"
+	}
+}

@@ -1,0 +1,45 @@
+{
+    "Show Current User": {
+		"prefix": "showcurrentuser",
+		"body": "SHOW CURRENT USER",
+		"description": "Lists the current user"
+	},
+	"Show Users": {
+		"prefix": "showusers",
+		"body": "SHOW USERS",
+		"description": "Lists all users"
+	},
+	"Create User": {
+		"prefix": "createuser",
+		"body": [
+			"CREATE${1: OR REPLACE} USER ${2:name}${3: IF NOT EXISTS}",
+			"SET ${4:${5:PLAINTEXT} ${6:ENCRYPTED}} PASSWORD ${7:'password'} ${8:CHANGE ${9:NOT} REQUIRED}",
+			"${10:SET STATUS ${11:ACTIVE}}",
+			"${12:SET HOME DATABASE ${13:$2}}",
+			""
+		],
+		"description": "Create a new user"
+	},
+	"Alter User": {
+		"prefix": "alteruser",
+		"body": [
+			"ALTER USER ${2:name}${3: IF EXISTS}",
+			"SET ${4:${5:PLAINTEXT} ${6:ENCRYPTED}} PASSWORD ${7:'password'} ${8:CHANGE ${9:NOT} REQUIRED}",
+			"${10:SET STATUS ${11:ACTIVE}}",
+			"${12:SET HOME DATABASE ${13:$2}}",
+			"${13:REMOVE HOME DATABASE}",
+			""
+		],
+		"description": "Alter a user's details"
+	},
+	"Rename User": {
+		"prefix": "renameuser",
+		"body": "RENAME USER ${1:adam} TO ${2:adrock}",
+		"description": "Rename a user"
+	},
+	"Delete User": {
+		"prefix": "deleteuser",
+		"body": "DELETE USER ${1:adam}",
+		"description": "Delete user"
+	}
+}

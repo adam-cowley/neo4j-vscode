@@ -10,17 +10,25 @@
 		"prefix": "merge",
 		"body": [
 			"MERGE (${1:n}:${2:Label} { ${3:id}: ${4:\\$${3}} })",
-			"${5:SET ${1}.${6:prop} = $${7:value}}}"
+			"${5:SET ${1}.${6:prop} = $${6}}"
 		],
 		"description": "Match a Node with a label"
 	},
-	"CREATE": {
-		"prefix": "create",
+	"CREATE node": {
+		"prefix": "createnode",
 		"body": [
 			"CREATE (${1:n}:${2:Label} { ${3:id}: ${4:\\$${3}} })",
 			""
 		],
 		"description": "Create a Node with a label"
+	},
+	"CREATE relationship": {
+		"prefix": "createrelationship",
+		"body": [
+			"CREATE (${1:n})-[${2:r}:${3:TYPE}${4: {${5:key: \\$value}\\}}]->(${6:m})",
+			""
+		],
+		"description": "Create a relationship between two nodes"
 	},
 	"Node": {
 		"prefix": "node",
@@ -46,21 +54,32 @@
 	"WITH": {
 		"prefix": "with",
 		"body": [
-			"WITH ${1:*}"
+			"WITH ${1:*}",
+			""
 		],
 		"description": "Add flow control step using WITH"
+	},
+	"UNWIND": {
+		"prefix": "unwind",
+		"body": [
+			"UNWIND ${1:$data} AS ${2:row}",
+			""
+		],
+		"description": "Unwind a list of values"
 	},
 	"Return": {
 		"prefix": "return",
 		"body": [
-			"RETURN ${1:*}"
+			"RETURN ${1:*}",
+			""
 		],
 		"description": "Return something"
 	},
 	"Delete": {
 		"prefix": "delete",
 		"body": [
-			"RETURN ${1:n}"
+			"DELETE ${1:n}",
+			""
 		],
 		"description": "Delete something"
 	},
@@ -70,5 +89,15 @@
 			"SET ${1:n}.${2:key} = ${3:$$value}"
 		],
 		"description": "Set a property"
+	},
+	"Create Constraint": {
+		"prefix": "createuniqueconstraint",
+		"body": "CREATE CONSTRAINT${1: IF NOT EXISTS} FOR (${2:n}:${3:Label}) REQUIRE (${2}.${4:id}) IS UNIQUE;\n",
+		"description": "Create a constraint"
+	},
+	"Create Node Key": {
+		"prefix": "createnodekeyconstraint",
+		"body": "CREATE CONSTRAINT ${1:IF NOT EXISTS} FOR (${2:n}:${3:Label}) REQUIRE (${2}.${4:id}, ${2}.${5:id}) IS NODE KEY;\n",
+		"description": "Create a constraint"
 	}
 }

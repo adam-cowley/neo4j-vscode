@@ -123,7 +123,7 @@ export function querySummary(result: QueryResult): string[] {
   if ( rows > 0 ) {
     // Started streaming 1 records after 5 ms and completed after 10  ms.
     output.push(
-      `Started streaming ${rows} record${rows === 1 ? '' : 's'} after ${result.summary.resultAvailableAfter}ms and completed after ${result.summary.resultConsumedAfter}ms.`
+      `Started streaming ${rows} record${rows === 1 ? '' : 's'} after ${result.summary.resultConsumedAfter}ms and completed after ${result.summary.resultAvailableAfter}ms.`
     )
   }
 

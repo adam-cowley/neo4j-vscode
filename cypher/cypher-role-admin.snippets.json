@@ -1,0 +1,37 @@
+{
+    "Show Roles": {
+		"prefix": "showroles",
+		"body": "SHOW${1: ALL POPULATED} ROLES${2: WITH USERS}",
+		"description": "List roles"
+	},
+	"Show Role Priveleges": {
+		"prefix": "showroleprivileges",
+		"body": "SHOW ROLE ${1:reader} PRIVELEGES ${2:AS${3: REVOKE} COMMANDS}",
+		"description": "Show role privileges"
+	},
+	"Create Role": {
+		"prefix": "createrole",
+		"body": "CREATE${1: OR REPLACE} ROLE ${2:name}${3: IF NOT EXISTS}${4: AS COPY OF ${5:otherName}}",
+		"description": "Create or replace a role"
+	},
+	"Rename Role": {
+		"prefix": "renamerole",
+		"body": "RENAME ROLE ${1:reader}${2: IF EXISTS} TO ${3:readonly}",
+		"description": "Changes the name of a role."
+	},
+	"Drop Role": {
+		"prefix": "droprole",
+		"body": "DROP ROLE ${1:reader}${2: IF EXISTS}",
+		"description": "Changes the name of a role."
+	},
+	"Grant Roles": {
+		"prefix": "grantrole",
+		"body": "GRANT ROLE${1:S} ${2:reader} TO ${3:adam}",
+		"description": "Assigns roles to users."
+	},
+	"Revoke Roles": {
+		"prefix": "revokerole",
+		"body": "REVOKE ROLE${1:S} ${2:reader} FROM ${3:adam}",
+		"description": "Removes roles from users."
+	}
+}
