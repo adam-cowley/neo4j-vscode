@@ -33,6 +33,6 @@ export default async function setParameter(parameters: ParameterManager): Promis
   if (stringMatch) {
     const [_all, key, value] = stringMatch
 
-    await parameters.set(key.trim(), value)
+    await parameters.set(key.trim(), value.trim())
   }
 }

@@ -1,14 +1,14 @@
-import { ExtensionContext, window } from 'vscode'
+import { window, ExtensionContext } from 'vscode'
 import ConnectionManager from '../../connections/connection-manager.class'
-import { METHOD_WRITE } from '../../constants'
+import { Method, METHOD_READ } from '../../constants'
 import CypherRunner from '../../cypher/runner'
 import ParameterManager from '../../parameters/parameters.manager'
 import { getDriverForConnection } from '../../utils'
 
-export default async function runWriteCypher(
-  context: ExtensionContext,
+export default async function runCypher(
   connections: ConnectionManager,
-  parameters: ParameterManager
+  cypherRunner: CypherRunner,
+  method: Method
 ): Promise<void> {
   // Get the active text editor
   const editor = window.activeTextEditor
@@ -24,13 +24,6 @@ export default async function runWriteCypher(
       return
     }
 
-    // const driver = await activeConnection.getDriver()
-    const driver = getDriverForConnection(activeConnection)
-    await driver.verifyConnectivity()
-
-    const cypherRunner = new CypherRunner(context, parameters, driver)
-
-
     const selections = editor.selections
       .filter(selection => !selection.isEmpty
           && editor.document.getText(selection)
@@ -40,7 +33,7 @@ export default async function runWriteCypher(
     if (selections.length === 0) {
       const documentText = editor.document.getText()
 
-      await cypherRunner.run(documentText, METHOD_WRITE)
+      await cypherRunner.run(activeConnection, documentText, method)
 
       return
     }
@@ -49,7 +42,7 @@ export default async function runWriteCypher(
     await Promise.all(selections.map(async (selection) => {
       const documentText = editor.document.getText(selection)
 
-      await cypherRunner.run(documentText, METHOD_WRITE)
+      await cypherRunner.run(activeConnection, documentText, method)
     }))
   }
 }

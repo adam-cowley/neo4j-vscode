@@ -5,7 +5,7 @@ import Database from './database.class'
 import User from './user.class'
 import Label from './label.class'
 import Role from './role.class'
-import { getDriverForConnection, iconPath } from '../utils'
+import { getDriverForConnection, iconPath, isAuraConnection } from '../utils'
 import { Connection, Scheme } from '../constants'
 
 export default class Instance implements INode {
@@ -35,7 +35,7 @@ export default class Instance implements INode {
     let icon = 'database'
     let edition = ''
 
-    if (this.host.endsWith('.neo4j.io')) {
+    if (isAuraConnection(this.host)) {
       icon = 'database-aura'
 
       edition = ` (aura)`

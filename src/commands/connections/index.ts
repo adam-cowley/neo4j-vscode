@@ -1,13 +1,15 @@
 import { window, commands, ExtensionContext } from "vscode"
 import ConnectionManager from "../../connections/connection-manager.class"
 import Instance from "../../connections/instance.class"
+import { METHOD_READ, METHOD_WRITE } from "../../constants"
+import CypherRunner from "../../cypher/runner"
 import ParameterManager from "../../parameters/parameters.manager"
-import runReadCypher from "../cypher/run-read-cypher"
-import runWriteCypher from "../cypher/run-write-cypher"
+import runReadCypher from "../cypher/run-cypher"
 import addAuraConnection from "./add-aura-connection"
 import addConnection from "./add-condition"
 import addLocalhost from "./add-localhost"
 import clearConnections from "./clear-connections"
+import openNeo4jBrowser from "./open-neo4j-browser"
 import removeConnection from "./remove-connection"
 import setActiveConnection from "./set-active-connection"
 
@@ -73,18 +75,31 @@ export function connectionSubscriptions(
     )
   )
 
+  context.subscriptions.push(
+    commands.registerCommand(
+      'neo4j.openNeo4jBrowser',
+      (connection?: Instance) => openNeo4jBrowser(connections, connection)
+    )
+  )
+
   // Cypher Queries
+  const runner = new CypherRunner(
+    context,
+    connections,
+    parameters
+  )
+
   context.subscriptions.push(
     commands.registerCommand(
       'neo4j.runReadCypher',
-      () => runReadCypher(context, connections, parameters)
+      () => runReadCypher(connections, runner, METHOD_READ)
     )
   )
 
   context.subscriptions.push(
     commands.registerCommand(
       'neo4j.runWriteCypher',
-      () => runWriteCypher(context, connections, parameters)
+      () => runReadCypher(connections, runner, METHOD_WRITE)
     )
   )
 }

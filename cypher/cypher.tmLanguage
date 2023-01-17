@@ -171,7 +171,7 @@
       <array>
         <dict>
           <key>match</key>
-          <string>(?i)\b(START|MATCH|WHERE|RETURN|UNION|FOREACH|WITH|AS|LIMIT|SKIP|UNWIND|HAS|DISTINCT|OPTIONAL\\s+MATCH|ORDER\s+BY)\b</string>
+          <string>(?i)\b(START|MATCH|WHERE|RETURN|UNION|FOREACH|WITH|AS|LIMIT|SKIP|UNWIND|HAS|DISTINCT|OPTIONAL\\s+MATCH|ORDER\s+BY|CALL|YIELD)\b</string>
           <key>name</key>
           <string>keyword.control.clause.cypher</string>
         </dict>

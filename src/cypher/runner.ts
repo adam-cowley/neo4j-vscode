@@ -1,37 +1,38 @@
-import { Driver } from 'neo4j-driver'
-import * as vscode from 'vscode'
-import { Method } from '../constants'
+import { ExtensionContext } from 'vscode'
+import { Connection, Method } from '../constants'
 import OutputChannel from '../output'
-import ResultWebView from '../result'
-import ParameterProvider from '../parameters/parameters.manager'
-import { querySummary } from '../utils'
+import ParameterManager from '../parameters/parameters.manager'
 import setParameterValue from '../commands/parameters/set-parameter-value'
+import ResultWindow from './result-window.class'
+import ConnectionManager from '../connections/connection-manager.class'
+import { getDriverForConnection } from '../utils'
 
 export default class CypherRunner {
+  private results: Map<string, ResultWindow> = new Map()
 
   constructor(
-    public readonly context: vscode.ExtensionContext,
-    public readonly parameters: ParameterProvider,
-    public readonly driver: Driver
+    public readonly context: ExtensionContext,
+    public readonly connections: ConnectionManager,
+    public readonly parameters: ParameterManager,
   ) {}
 
-  async run(input: string, method: Method): Promise<void> {
+  async run(connection: Connection, input: string, method: Method): Promise<void> {
     // Split text on ; and a new line
     const queries = input.split(';\n')
 
     // Run individual queries
     for (const query of queries) {
       if (query && query !== '') {
-        await this.runSingle(query.trim(), method)
+        await this.runSingle(connection, query.trim(), method)
       }
     }
   }
 
-  async runSingle(cypher: string, method: Method): Promise<void> {
-    const session = this.driver.session()
+  async runSingle(connection: Connection, cypher: string, method: Method): Promise<void> {
+    const driver = getDriverForConnection(connection)
 
     try {
-      // Detect Parameters
+      // Detect Missing Parameters
       const parameters = cypher.match(/\$([a-z0-9_]+)/g)
 
       if ( parameters ) {
@@ -42,37 +43,37 @@ export default class CypherRunner {
         }
       }
 
-      // Get parameter list
-      const params = await this.parameters.asParameters()
+      // Check for existing query result window
+      const key = Buffer.from(cypher).toString('base64')
 
-      OutputChannel.append('--')
-      OutputChannel.append(method)
-      OutputChannel.append(cypher)
-      OutputChannel.append(JSON.stringify(params, null, 2))
-
-      const res = await session[method](
-        tx => tx.run(
-          cypher,
-          params
-        )
-      )
-
-      // Query Summary
-      for ( const value of querySummary(res)) {
-        OutputChannel.append(value)
+      if ( this.results.has(key) ) {
+        return this.results.get(key)!.run(method)
       }
 
-      ResultWebView.show(res, cypher)
+      const resultWindow = new ResultWindow(
+        this.context,
+        this.parameters,
+        connection,
+        cypher,
+        method
+      )
+
+      // Add to map
+      this.results.set(key, resultWindow)
+
+      // Remove on close
+      resultWindow.panel.onDidDispose(() => this.results.delete(key))
+
+      // Run the query
+      return resultWindow.run(method)
     }
     catch (e: any) {
       OutputChannel.append('Error Running Query')
       OutputChannel.append(e.message)
       OutputChannel.show()
-
-      console.error(e)
     }
     finally {
-      await session.close()
+      await driver.close()
     }
   }
 }

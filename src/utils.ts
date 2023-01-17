@@ -141,7 +141,7 @@ export function querySummary(result: QueryResult): string[] {
     }
 
     if ( updates.length > 0) {
-      output.push(updates.join(' '))
+      output.push(updates.join(', '))
     }
   }
 
@@ -154,13 +154,6 @@ export function querySummary(result: QueryResult): string[] {
 }
 
 export function iconPath(filename: string): { light: string, dark: string} {
-  console.log(filename, {light: join(
-    __filename, '..', 'images', 'icons', `${filename}-light.svg`
-  ),
-  dark: join(
-    __filename, '..', 'images', 'icons', `${filename}-dark.svg`
-  ),})
-
   return {
     light: join(
       __filename, '..', '..', 'images', 'icons', `${filename}-light.svg`
@@ -169,4 +162,8 @@ export function iconPath(filename: string): { light: string, dark: string} {
       __filename, '..', '..', 'images', 'icons', `${filename}-dark.svg`
     ),
   }
+}
+
+export function isAuraConnection(host: string): boolean {
+  return host.endsWith('.neo4j.io')
 }
