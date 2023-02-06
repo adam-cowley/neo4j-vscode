@@ -12,7 +12,7 @@ The Neo4j VS Code Extension allows you to manage connections and run Cypher with
 * Highlight individual Cypher statements in your code and run with
 * Supercharge your development with code snippets for
   * Cypher
-  * Node.js, JavaScript & TypeScript
+  * Node.js, JavaScript, TypeScript and Python
 
 ## Roadmap
 

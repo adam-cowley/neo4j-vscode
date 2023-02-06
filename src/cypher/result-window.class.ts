@@ -3,6 +3,7 @@ import { Connection, Method } from "../constants"
 import OutputChannel from "../output"
 import ParameterManager from "../parameters/parameters.manager"
 import { getDriverForConnection } from "../utils"
+import type { SessionConfig } from "neo4j-driver"
 import { getErrorContent, getLoadingContent, getResultContent } from "./result.utils"
 
 export default class ResultWindow {
@@ -34,11 +35,17 @@ export default class ResultWindow {
     // Start output
     OutputChannel.append('--')
 
-    OutputChannel.append(method)
+    OutputChannel.append(`${method} on database ${this.connection.database || 'neo4j'}`)
     OutputChannel.append(this.cypher)
     OutputChannel.append(JSON.stringify(params, null, 2))
 
-    const session = driver.session()
+    // Session Options
+    const options: SessionConfig = {}
+    if (this.connection.database) {
+      options.database = this.connection.database
+    }
+
+    const session = driver.session(options)
 
     try {
       // Loading

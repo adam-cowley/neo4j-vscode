@@ -2,6 +2,12 @@
 
 All notable changes to the "neo4j-vscode" extension will be documented in this file.
 
+## [0.1.6]
+
+- Fixed bug where database is ignored on current database
+- Added a few more Cypher snippets
+- Obscure password on addConnection command
+
 ## [0.1.5]
 
 - The existing result window will be used when running the same query

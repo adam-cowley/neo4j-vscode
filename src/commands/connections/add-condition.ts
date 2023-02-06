@@ -31,6 +31,7 @@ export default async function addConnection(connections: ConnectionManager) {
 
   const password = await window.showInputBox({
     prompt: "Password?",
+    password: true,
     placeHolder: "********",
     ignoreFocusOut: true
   })

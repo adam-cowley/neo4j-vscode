@@ -21,6 +21,7 @@ export default class Instance implements INode {
     public readonly port: string,
     public readonly username: string,
     public readonly password: string,
+    public readonly database: string | undefined,
     public readonly active: boolean
   ) {
     // this.getDriver()
@@ -34,6 +35,7 @@ export default class Instance implements INode {
 
     let icon = 'database'
     let edition = ''
+    let database = this.database ? `/${this.database}` : ''
 
     if (isAuraConnection(this.host)) {
       icon = 'database-aura'
@@ -67,7 +69,7 @@ export default class Instance implements INode {
 
     return {
       id: this.id,
-      label: `${this.name || this.id}${edition}${active}`,
+      label: `${this.name || this.id}${database}${edition}${active}`,
       collapsibleState: vscode.TreeItemCollapsibleState.None,
       contextValue: "connection",
       iconPath: iconPath(icon),

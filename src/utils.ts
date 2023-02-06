@@ -141,14 +141,13 @@ export function querySummary(result: QueryResult): string[] {
     }
 
     if ( updates.length > 0) {
-      output.push(updates.join(', '))
+      output.push(`${updates.join(', ')}.`)
     }
   }
 
   if ( counters.containsSystemUpdates() ) {
     output.push(`${counters.systemUpdates()} system updates.`)
   }
-
 
   return output
 }

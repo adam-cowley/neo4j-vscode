@@ -59,6 +59,14 @@
 		],
 		"description": "Add flow control step using WITH"
 	},
+	"CASE": {
+		"prefix": "case",
+		"body": "CASE WHEN ${1:true} THEN ${2:[1]} ELSE ${3:[]} END"
+	},
+	"FOREACH": {
+		"prefix": "foreach",
+		"body": "FOREACH ( ${1:id} IN ${2:[1,2,3]} | ${3:MERGE (p:Person {id: ${1}\\}} )"
+	},
 	"UNWIND": {
 		"prefix": "unwind",
 		"body": [

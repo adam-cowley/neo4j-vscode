@@ -89,7 +89,7 @@ function wrapper(cypher: string, params: Record<string, any>, content: string): 
 
 function renderTable(res: QueryResult) {
   if ( res.records.length === 0 ) {
-    return `<p>No results</p>`
+    return `<p>No records returned</p>`
   }
 
   return `
@@ -99,10 +99,7 @@ function renderTable(res: QueryResult) {
       </thead>
       <tbody>
         ${res.records.map(
-    record => renderRow(
-      record.keys,
-                toNativeTypes(record.toObject()) as any
-    )
+    record => renderRow(record.keys, toNativeTypes(record.toObject()) as any)
   ).join('\n')}
       </tbody>
     </table>

@@ -34,6 +34,7 @@ export default class ConnectionTreeProvider extends TreeProvider {
         n.port,
         n.username,
         n.password,
+        n.database,
         n.active
       )))
   }
