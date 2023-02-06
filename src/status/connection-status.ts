@@ -36,6 +36,7 @@ export async function updateActiveConnectionStatusBarItem(
   activeConnectionStatusBarItem.command = 'neo4j.setActiveConnection'
 
   activeConnectionStatusBarItem.text = active
+    // eslint-disable-next-line max-len
     ? `$(database) ${active.scheme}://${active.username}@${active.host}:${active.port}${active.database ? `/${active.database}` : ''}`
     : '$(database) No Active Neo4j Connection'
 }

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import * as vscode from 'vscode'
 import INode from './inode.interface'
 

@@ -2,9 +2,12 @@ import { window } from 'vscode'
 import { ParameterType, parameterTypes } from '../../constants'
 import ParameterManager from "../../parameters/parameters.manager"
 
-export default async function verboseSetParameter(parameters: ParameterManager): Promise<void> {
+export default async function verboseSetParameter(
+  parameters: ParameterManager
+): Promise<void> {
   const key = await window.showInputBox({
     prompt: "Key",
+    // eslint-disable-next-line max-len
     placeHolder: "This parameter can be used by prefixing the key with $ in your Cypher statements",
     ignoreFocusOut: true,
   })

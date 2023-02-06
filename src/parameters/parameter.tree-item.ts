@@ -1,4 +1,3 @@
-import * as path from 'path'
 import { TreeItem } from "vscode"
 import INode from "../tree/inode.interface"
 import { iconPath } from '../utils'

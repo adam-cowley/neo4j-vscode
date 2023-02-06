@@ -1,9 +1,7 @@
-import { window, ExtensionContext } from 'vscode'
+import { window } from 'vscode'
 import ConnectionManager from '../../connections/connection-manager.class'
-import { Method, METHOD_READ } from '../../constants'
+import { Method } from '../../constants'
 import CypherRunner from '../../cypher/runner'
-import ParameterManager from '../../parameters/parameters.manager'
-import { getDriverForConnection } from '../../utils'
 
 export default async function runCypher(
   connections: ConnectionManager,

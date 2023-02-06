@@ -16,7 +16,7 @@
         "no-throw-literal": "warn",
         "semi": ["error", "never"],
         "indent": ["warn", 2],
-        "no-unused-vars": "warn",
+        "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" } ],
         "max-len": ["warn", {"code": 90}],
         "no-console": "warn"
     },

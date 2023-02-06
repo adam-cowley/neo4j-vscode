@@ -1,4 +1,4 @@
-import * as vscode from 'vscode';
+import * as vscode from 'vscode'
 
 export default interface INode {
     getTreeItem(): Promise<vscode.TreeItem> | vscode.TreeItem;

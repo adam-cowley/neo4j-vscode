@@ -1,10 +1,8 @@
-import * as path from 'path'
-import * as vscode from 'vscode'
+import { TreeItemCollapsibleState } from 'vscode'
 import INode from "../tree/inode.interface"
 import Member from './member.class'
 
 export default class Role implements INode {
-
   constructor(
         private readonly role: string,
         private readonly members: string[] = [],
@@ -17,7 +15,7 @@ export default class Role implements INode {
   getTreeItem() {
     return {
       label: this.role,
-      collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
+      collapsibleState: TreeItemCollapsibleState.Collapsed,
       contextValue: 'role'
     }
   }
@@ -27,5 +25,4 @@ export default class Role implements INode {
       ? this.members.map(member => new Member(member))
       : [new Member('(none)')]
   }
-
 }
