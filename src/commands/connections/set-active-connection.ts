@@ -1,13 +1,12 @@
 import { window } from 'vscode'
 import ConnectionManager from "../../connections/connection-manager.class"
-import Instance from '../../connections/instance.class'
 
 export default async function setActiveConnection(
   connections: ConnectionManager,
-  selected?: Instance
+  selected?: string
 ) {
   if ( selected !== undefined ) {
-    await connections.setActive(selected.id)
+    await connections.setActive(selected)
 
     return
   }

@@ -21,7 +21,7 @@ export default class Instance implements INode {
     public readonly port: string,
     public readonly username: string,
     public readonly password: string,
-    public readonly database: string | undefined,
+    public readonly database: string | null | undefined,
     public readonly active: boolean
   ) {
     // this.getDriver()

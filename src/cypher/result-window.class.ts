@@ -41,7 +41,7 @@ export default class ResultWindow {
 
     // Session Options
     const options: SessionConfig = {}
-    if (this.connection.database) {
+    if (this.connection.database && this.connection.database !== null) {
       options.database = this.connection.database
     }
 

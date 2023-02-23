@@ -2,6 +2,11 @@
 
 All notable changes to the "neo4j-vscode" extension will be documented in this file.
 
+## [0.1.7]
+
+- If you run the **Neo4j: Add Connection** command with an open .env file containing Neo4j credentials, they will be used to create the new connection.
+- Fixed bug when clicking on tree items in newer versions of VS Code
+
 ## [0.1.6]
 
 - Fixed bug where database is ignored on current database

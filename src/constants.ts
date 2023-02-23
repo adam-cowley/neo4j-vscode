@@ -24,7 +24,7 @@ export interface Connection {
     port: string;
     username: string;
     password: string;
-    database?: string;
+    database?: string | null;
     active: boolean;
 }
 

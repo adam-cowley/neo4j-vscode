@@ -6,7 +6,7 @@ import CypherRunner from "../../cypher/runner"
 import ParameterManager from "../../parameters/parameters.manager"
 import runReadCypher from "../cypher/run-cypher"
 import addAuraConnection from "./add-aura-connection"
-import addConnection from "./add-condition"
+import addConnection from "./add-connection"
 import addLocalhost from "./add-localhost"
 import clearConnections from "./clear-connections"
 import openNeo4jBrowser from "./open-neo4j-browser"
@@ -46,7 +46,6 @@ export function connectionSubscriptions(
     )
   )
 
-
   context.subscriptions.push(
     commands.registerCommand(
       'neo4j.addConnection',
@@ -71,7 +70,13 @@ export function connectionSubscriptions(
   context.subscriptions.push(
     commands.registerCommand(
       'neo4j.setActiveConnection',
-      (connection?: Instance) => setActiveConnection(connections, connection)
+      (connection?: Instance | string) => {
+        if (connection instanceof Instance) {
+          connection = connection.id
+        }
+
+        setActiveConnection(connections, connection)
+      }
     )
   )
 

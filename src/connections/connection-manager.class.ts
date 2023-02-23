@@ -54,6 +54,10 @@ export default class ConnectionManager {
     vscode.window.showInformationMessage(`Connection added to ${id}.`)
   }
 
+  async get(id: string): Promise<Connection | undefined> {
+    return this.getState()[ id ]
+  }
+
   async remove(id: string): Promise<void> {
     const connections = this.getState()
 

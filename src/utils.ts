@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
+import { window } from 'vscode'
 import { join } from 'path'
 import neo4j, {
   isDate,
@@ -13,36 +14,21 @@ import neo4j, {
 } from "neo4j-driver"
 import { Connection, Scheme, SCHEME_NEO4J } from "./constants"
 
-export function extractCredentials(uri: string): Connection | undefined {
-  // eslint-disable-next-line max-len
-  const pattern = new RegExp(/^(((neo4j|bolt)(\+s?(sc)?)?)?:\/\/)?(([a-z0-9+.-]+):([a-z0-9+.-]+)@)?([a-z0-9+.-]+)(:([0-9]{4}))?(\?database=([a-z0-9-]+))?$/)
-
-  const parts = uri.match(pattern)
-
-  if (!parts) {
-    return
+export function extractCredentials(input: string): Connection | undefined {
+  // Append protocol if none exists
+  if (!input.includes('://')) {
+    input = 'neo4j://' + input
   }
 
-  const [
-    _full,
-    _fullScheme,
-    scheme,
-    _schemeStart,
-    _secure,
-    _unknown,
-    _userpassat,
-    username,
-    password,
-    host,
-    _colonport,
-    port,
-    _databaseEquals,
-    database,
-  ] = parts
+  // Parse URL
+  const url = new URL(input)
+
+  const { protocol, username, password, hostname, port, searchParams } = url
+  const database = searchParams.get('database')
 
   return {
-    scheme: (scheme || SCHEME_NEO4J) as Scheme,
-    host,
+    scheme: (protocol.replace(':', '') || SCHEME_NEO4J) as Scheme,
+    host: hostname,
     port: port || '7687',
     username,
     password,
@@ -61,7 +47,6 @@ export function extractCredentials(uri: string): Connection | undefined {
 // console.log(extractCredentials("wt")) // {"scheme":"neo4j","host":"wt"}
 // console.log(extractCredentials("1234")) // {"scheme":"neo4j","host":"1234"}
 // console.log(extractCredentials("127.0.0.1:1234")) // {"scheme":"neo4j","host":"127.0.0.1","port":"1234"}
-
 
 /**
  * Convert Neo4j Properties back into JavaScript types
@@ -165,4 +150,53 @@ export function iconPath(filename: string): { light: string, dark: string} {
 
 export function isAuraConnection(host: string): boolean {
   return host.endsWith('.neo4j.io')
+}
+
+export async function extractCredentialsFromActiveEditor(): Promise<Partial<Connection>>  {
+  // Check current file for .env
+  let envScheme: Scheme | undefined,
+    envHost: string | undefined,
+    envPort: string | undefined,
+    envUsername: string | undefined,
+    envPassword: string | undefined,
+    envDatabase: string | null | undefined
+
+  if ( window.activeTextEditor ) {
+    const text = window.activeTextEditor.document.getText()
+
+    if (text?.includes('NEO4J_URI')) {
+      const matchUri = text.match(/NEO4J_URI=(.*)/)
+      const matchUsername = text.match(/NEO4J_USERNAME=(.*)/)
+      const matchPassword = text.match(/NEO4J_PASSWORD=(.*)/)
+
+      if ( matchUri ) {
+        try {
+          const res = extractCredentials(matchUri[1])
+
+          envScheme = res?.scheme
+          envHost = res?.host
+          envPort = res?.port
+          envDatabase = res?.database
+        }
+        catch(e:unknown) {}
+      }
+      if ( matchUsername ) {
+        envUsername = matchUsername[1].trim() as string
+      }
+      if ( matchPassword ) {
+        envPassword = matchPassword[1].trim() as string
+      }
+
+      return {
+        scheme: envScheme,
+        host: envHost,
+        port: envPort,
+        username: envUsername,
+        password: envPassword,
+        database: envDatabase,
+      } as Partial<Connection>
+    }
+  }
+
+  return {}
 }

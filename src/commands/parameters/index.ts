@@ -34,7 +34,12 @@ export function parameterSubscriptions(
   context.subscriptions.push(
     commands.registerCommand(
       'neo4j.setParameterValue',
-      (selected: ParameterTreeItem) => setParameterValue(parameters, selected.getKey())
+      (selected: ParameterTreeItem | string) => {
+        if ( selected instanceof ParameterTreeItem ) {
+          selected = selected.getKey()
+        }
+        setParameterValue(parameters, selected)
+      }
     )
   )
 

@@ -26,18 +26,6 @@
 		"DB"
 	],
 	"main": "./out/extension.js",
-	"activationEvents": [
-		"onCommand:neo4j.addConnection",
-		"onCommand:neo4j.addAuraConnection",
-		"onCommand:neo4j.removeConnection",
-		"onCommand:neo4j.clearConnections",
-		"onCommand:neo4j.addLocalhost",
-		"onCommand:neo4j.openNeo4jBrowser",
-		"onCommand:neo4j.refresh",
-		"onCommand:neo4j.setParameter",
-		"onCommand:neo4j.removeParameter",
-		"onCommand:neo4j.setParameterValue"
-	],
 	"contributes": {
 		"grammars": [
 			{
@@ -250,22 +238,22 @@
 			"view/item/context": [
 				{
 					"when": "view == neo4j.connections && viewItem == connection",
-					"command": "neo4j.removeConnection",
-					"group": "inline"
-				},
-				{
-					"when": "view == neo4j.connections && viewItem == connection",
 					"command": "neo4j.setActiveConnection",
 					"group": "inline"
 				},
 				{
-					"when": "view == neo4j.parameters && viewItem == parameter",
-					"command": "neo4j.setParameterValue",
+					"when": "view == neo4j.connections && viewItem == connection",
+					"command": "neo4j.removeConnection",
 					"group": "inline"
 				},
 				{
 					"when": "view == neo4j.parameters && viewItem == parameter",
 					"command": "neo4j.removeParameter",
+					"group": "inline"
+				},
+				{
+					"when": "view == neo4j.parameters && viewItem == parameter",
+					"command": "neo4j.setParameterValue",
 					"group": "inline"
 				}
 			]
