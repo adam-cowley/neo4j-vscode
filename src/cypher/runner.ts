@@ -33,7 +33,7 @@ export default class CypherRunner {
 
     try {
       // Detect Missing Parameters
-      const parameters = cypher.match(/\$([a-z0-9_]+)/g)
+      const parameters = cypher.match(/\$([a-z0-9_]+)/gi)
 
       if ( parameters ) {
         for (const parameter of parameters) {

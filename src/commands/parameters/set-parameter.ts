@@ -13,7 +13,7 @@ export default async function setParameter(parameters: ParameterManager): Promis
   }
 
   // key => object
-  const objectMatch = param.match(/^([a-z0-9\s]+)=>(.*)$/)
+  const objectMatch = param.match(/^([a-z0-9\s]+)=>(.*)$/i)
 
   if (objectMatch) {
     const [_all, key, value] = objectMatch
@@ -28,7 +28,7 @@ export default async function setParameter(parameters: ParameterManager): Promis
   }
 
   // key: string
-  const stringMatch = param.match(/^([a-z0-9\s]+):(.*)$/)
+  const stringMatch = param.match(/^([a-z0-9\s]+):(.*)$/i)
 
   if (stringMatch) {
     const [_all, key, value] = stringMatch

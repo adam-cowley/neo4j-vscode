@@ -2,6 +2,10 @@
 
 All notable changes to the "neo4j-vscode" extension will be documented in this file.
 
+## [0.1.8]
+
+- Applied case insensitivity to parameter commands
+
 ## [0.1.7]
 
 - If you run the **Neo4j: Add Connection** command with an open .env file containing Neo4j credentials, they will be used to create the new connection.
