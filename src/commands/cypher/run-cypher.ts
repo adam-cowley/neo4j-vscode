@@ -57,19 +57,19 @@ export default async function runCypher(
           && editor.document.getText(selection)
       )
 
-    // Check if we are in a markdown file and if the cursor is inside a cypher code block
-    if (editor.document.languageId === 'markdown') {
-      const documentText = await handleMarkdown(editor)
-      if (documentText) {
-        await cypherRunner.run(activeConnection, documentText, method)
-      }
-
-      return
-    }
-
-    // Attempt to run entire file
+      
+    // Attempt to run entire file or code block if no selection
     if (selections.length === 0) {
-      const documentText = editor.document.getText()
+      const isMarkdown = editor.document.languageId === 'markdown'
+
+      const documentText = 
+        isMarkdown ? await handleMarkdown(editor) :
+          editor.document.getText()
+
+      if (!documentText) {
+        window.showErrorMessage(`No text in ${isMarkdown ? 'code block' : 'document'}`)
+        return
+      }
 
       await cypherRunner.run(activeConnection, documentText, method)
 
