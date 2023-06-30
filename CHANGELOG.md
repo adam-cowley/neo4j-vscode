@@ -2,6 +2,12 @@
 
 All notable changes to the "neo4j-vscode" extension will be documented in this file.
 
+## [0.1.9]
+
+- Added support for Cypher code blocks in Markdown files
+
+[Reference](https://stackoverflow.com/a/76239666/3876654)
+
 ## [0.1.8]
 
 - Applied case insensitivity to parameter commands

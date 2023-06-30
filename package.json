@@ -1,298 +1,321 @@
 {
-	"name": "neo4j-vscode",
-	"displayName": "Neo4j",
-	"description": "A Neo4j extension for VS Code",
-	"homepage": "https://github.com/adam-cowley/neo4j-vscode",
-	"icon": "images/logo/Neo4j-icon-color.png",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/adam-cowley/neo4j-vscode"
-	},
-	"version": "0.1.8",
-	"engines": {
-		"vscode": "^1.74.0"
-	},
-	"publisher": "adamcowley",
-	"categories": [
-		"Programming Languages",
-		"Snippets",
-		"Other"
-	],
-	"keywords": [
-		"Neo4j",
-		"Cypher",
-		"Graph",
-		"Database",
-		"DB"
-	],
-	"main": "./out/extension.js",
-	"activationEvents": [],
-	"contributes": {
-		"grammars": [
-			{
-				"language": "cypher",
-				"scopeName": "source.cypher",
-				"path": "./cypher/cypher.tmLanguage"
-			}
-		],
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "neo4j",
-					"title": "Neo4j",
-					"icon": "images/logo/Neo4j-icon-color.png"
-				}
-			]
-		},
-		"views": {
-			"neo4j": [
-				{
-					"id": "neo4j.connections",
-					"name": "Databases"
-				},
-				{
-					"id": "neo4j.parameters",
-					"name": "Parameters"
-				}
-			],
-			"test": [
-				{
-					"id": "neo4j.test",
-					"name": "Neo4j"
-				}
-			],
-			"debug": [
-				{
-					"id": "neo4j.debug",
-					"name": "Neo4j"
-				}
-			]
-		},
-		"viewsWelcome": [
-			{
-				"view": "neo4j.connections",
-				"contents": "By adding a database connection you will be able to run Cypher queries directly through VS Code.\n[Add Database Connection](command:neo4j.addConnection)\nor [add a Neo4j Aura Database](command:neo4j.addAuraConnection).\nLearn everything you need to know to be successful with Neo4j with [Neo4j GraphAcademy](https://graphacademy.neo4j.com?ref=vscode)",
-				"when": "workbenchState == empty"
-			}
-		],
-		"commands": [
-			{
-				"command": "neo4j.addConnection",
-				"title": "Neo4j: Add Connection"
-			},
-			{
-				"command": "neo4j.addAuraConnection",
-				"title": "Neo4j: Add Aura Connection"
-			},
-			{
-				"command": "neo4j.removeConnection",
-				"title": "Neo4j: Remove Connection",
-				"icon": {
-					"dark": "images/icons/remove-dark.svg",
-					"light": "images/icons/remove-light.svg"
-				}
-			},
-			{
-				"command": "neo4j.clearConnections",
-				"title": "Neo4j: Remove all Connections"
-			},
-			{
-				"command": "neo4j.addLocalhost",
-				"title": "Neo4j: Add Local Database"
-			},
-			{
-				"command": "neo4j.setActiveConnection",
-				"title": "Neo4j: Set Active Connection",
-				"icon": {
-					"dark": "images/icons/set-active-dark.svg",
-					"light": "images/icons/set-active-light.svg"
-				}
-			},
-			{
-				"command": "neo4j.openNeo4jBrowser",
-				"title": "Neo4j: Open Neo4j Browser"
-			},
-			{
-				"command": "neo4j.refresh",
-				"title": "Neo4j: Refresh Databases"
-			},
-			{
-				"command": "neo4j.setParameter",
-				"title": "Neo4j: Set Parameter"
-			},
-			{
-				"command": "neo4j.setParameterValue",
-				"title": "Neo4j: Set Parameter Value",
-				"icon": {
-					"dark": "images/icons/edit-dark.svg",
-					"light": "images/icons/edit-light.svg"
-				}
-			},
-			{
-				"command": "neo4j.removeParameter",
-				"title": "Neo4j: Remove Parameter",
-				"icon": {
-					"dark": "images/icons/remove-dark.svg",
-					"light": "images/icons/remove-light.svg"
-				}
-			},
-			{
-				"command": "neo4j.clearParameters",
-				"title": "Neo4j: Remove all Parameters"
-			},
-			{
-				"command": "neo4j.runReadCypher",
-				"title": "Neo4j: Run Cypher Statement in a Read Transaction"
-			},
-			{
-				"command": "neo4j.runWriteCypher",
-				"title": "Neo4j: Run Cypher Statement in a Write Transaction"
-			}
-		],
-		"keybindings": [
-			{
-				"command": "neo4j.addConnection",
-				"key": "ctrl+alt+,",
-				"mac": "shift+cmd+,"
-			},
-			{
-				"command": "neo4j.removeConnection",
-				"key": "ctrl+alt+,",
-				"mac": "shift+cmd-,"
-			},
-			{
-				"command": "neo4j.clearConnections",
-				"key": "ctrl+alt+.",
-				"mac": "shift+cmd+."
-			},
-			{
-				"command": "neo4j.refresh",
-				"key": "ctrl+alt+.",
-				"mac": "shift+cmd+/"
-			},
-			{
-				"command": "neo4j.runReadCypher",
-				"key": "ctrl+alt+space",
-				"mac": "ctrl+cmd+space"
-			},
-			{
-				"command": "neo4j.runWriteCypher",
-				"key": "ctrl+alt+shift+space",
-				"mac": "ctrl+alt+cmd+space"
-			}
-		],
-		"languages": [
-			{
-				"id": "cypher",
-				"aliases": [
-					"Cypher Query Language",
-					"cypher"
-				],
-				"extensions": [
-					".cypher",
-					".cql",
-					".cy",
-					".cyp"
-				],
-				"configuration": "./cypher/cypher.configuration.json",
-				"icon": {
-					"dark": "images/logo/Neo4j-icon-white.png",
-					"light": "images/logo/Neo4j-icon-color.png"
-				}
-			}
-		],
-		"snippets": [
-			{
-				"language": "cypher",
-				"path": "./cypher/cypher.snippets.json"
-			},
-			{
-				"language": "cypher",
-				"path": "./cypher/cypher-db-admin.snippets.json"
-			},
-			{
-				"language": "cypher",
-				"path": "./cypher/cypher-role-admin.snippets.json"
-			},
-			{
-				"language": "cypher",
-				"path": "./cypher/cypher-user-admin.snippets.json"
-			},
-			{
-				"language": "javascript",
-				"path": "./snippets/nodejs.snippets.json"
-			},
-			{
-				"language": "typescript",
-				"path": "./snippets/typescript.snippets.json"
-			},
-			{
-				"language": "typescript",
-				"path": "./snippets/nodejs.snippets.json"
-			},
-			{
-				"language": "python",
-				"path": "./snippets/python.snippets.json"
-			}
-		],
-		"menus": {
-			"view/item/context": [
-				{
-					"when": "view == neo4j.connections && viewItem == connection",
-					"command": "neo4j.setActiveConnection",
-					"group": "inline"
-				},
-				{
-					"when": "view == neo4j.connections && viewItem == connection",
-					"command": "neo4j.removeConnection",
-					"group": "inline"
-				},
-				{
-					"when": "view == neo4j.parameters && viewItem == parameter",
-					"command": "neo4j.removeParameter",
-					"group": "inline"
-				},
-				{
-					"when": "view == neo4j.parameters && viewItem == parameter",
-					"command": "neo4j.setParameterValue",
-					"group": "inline"
-				}
-			]
-		}
-	},
-	"preview": false,
-	"scripts": {
-		"vscode:prepublish": "npm run esbuild-base -- --minify",
-		"esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
-		"esbuild": "npm run esbuild-base -- --sourcemap",
-		"esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/glob": "^8.0.0",
-		"@types/mocha": "^10.0.1",
-		"@types/node": "16.x",
-		"@types/vscode": "^1.74.0",
-		"@typescript-eslint/eslint-plugin": "^5.45.0",
-		"@typescript-eslint/parser": "^5.45.0",
-		"@vscode/test-electron": "^2.2.0",
-		"esbuild": "^0.16.16",
-		"eslint": "^8.28.0",
-		"glob": "^8.0.3",
-		"mocha": "^10.1.0",
-		"typescript": "^4.9.3"
-	},
-	"dependencies": {
-		"neo4j-driver": "^5.3.0"
-	},
-	"__metadata": {
-		"id": "ea38e725-4f4e-442a-83fc-1bd2d92b73c2",
-		"publisherDisplayName": "Adam Cowley",
-		"publisherId": "68aca428-7f48-4430-bd93-d05115780147",
-		"isPreReleaseVersion": false
-	}
+    "name": "neo4j-vscode",
+    "displayName": "Neo4j",
+    "description": "A Neo4j extension for VS Code",
+    "homepage": "https://github.com/adam-cowley/neo4j-vscode",
+    "icon": "images/logo/Neo4j-icon-color.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/adam-cowley/neo4j-vscode"
+    },
+    "version": "0.1.8",
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "publisher": "adamcowley",
+    "categories": [
+        "Programming Languages",
+        "Snippets",
+        "Other"
+    ],
+    "keywords": [
+        "Neo4j",
+        "Cypher",
+        "Graph",
+        "Database",
+        "DB"
+    ],
+    "main": "./out/extension.js",
+    "activationEvents": [],
+    "markdown.codeLanguages": [
+        {
+            "id": "cypher",
+            "aliases": [
+                "cypher",
+                "Cypher Query Language"
+            ]
+        }
+    ],
+    "contributes": {
+        "grammars": [
+            {
+                "language": "cypher",
+                "scopeName": "source.cypher",
+                "path": "./cypher/cypher.tmLanguage"
+            },
+            {
+                "language": "cypher-markdown-injection",
+                "scopeName": "markdown.cypher.codeblock",
+                "path": "./syntaxes/cypher-markdown-injection.json",
+                "injectTo": [
+                    "text.html.markdown"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.block.cypher": "cypher"
+                }
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "neo4j",
+                    "title": "Neo4j",
+                    "icon": "images/logo/Neo4j-icon-color.png"
+                }
+            ]
+        },
+        "views": {
+            "neo4j": [
+                {
+                    "id": "neo4j.connections",
+                    "name": "Databases"
+                },
+                {
+                    "id": "neo4j.parameters",
+                    "name": "Parameters"
+                }
+            ],
+            "test": [
+                {
+                    "id": "neo4j.test",
+                    "name": "Neo4j"
+                }
+            ],
+            "debug": [
+                {
+                    "id": "neo4j.debug",
+                    "name": "Neo4j"
+                }
+            ]
+        },
+        "viewsWelcome": [
+            {
+                "view": "neo4j.connections",
+                "contents": "By adding a database connection you will be able to run Cypher queries directly through VS Code.\n[Add Database Connection](command:neo4j.addConnection)\nor [add a Neo4j Aura Database](command:neo4j.addAuraConnection).\nLearn everything you need to know to be successful with Neo4j with [Neo4j GraphAcademy](https://graphacademy.neo4j.com?ref=vscode)",
+                "when": "workbenchState == empty"
+            }
+        ],
+        "commands": [
+            {
+                "command": "neo4j.addConnection",
+                "title": "Neo4j: Add Connection"
+            },
+            {
+                "command": "neo4j.addAuraConnection",
+                "title": "Neo4j: Add Aura Connection"
+            },
+            {
+                "command": "neo4j.removeConnection",
+                "title": "Neo4j: Remove Connection",
+                "icon": {
+                    "dark": "images/icons/remove-dark.svg",
+                    "light": "images/icons/remove-light.svg"
+                }
+            },
+            {
+                "command": "neo4j.clearConnections",
+                "title": "Neo4j: Remove all Connections"
+            },
+            {
+                "command": "neo4j.addLocalhost",
+                "title": "Neo4j: Add Local Database"
+            },
+            {
+                "command": "neo4j.setActiveConnection",
+                "title": "Neo4j: Set Active Connection",
+                "icon": {
+                    "dark": "images/icons/set-active-dark.svg",
+                    "light": "images/icons/set-active-light.svg"
+                }
+            },
+            {
+                "command": "neo4j.openNeo4jBrowser",
+                "title": "Neo4j: Open Neo4j Browser"
+            },
+            {
+                "command": "neo4j.refresh",
+                "title": "Neo4j: Refresh Databases"
+            },
+            {
+                "command": "neo4j.setParameter",
+                "title": "Neo4j: Set Parameter"
+            },
+            {
+                "command": "neo4j.setParameterValue",
+                "title": "Neo4j: Set Parameter Value",
+                "icon": {
+                    "dark": "images/icons/edit-dark.svg",
+                    "light": "images/icons/edit-light.svg"
+                }
+            },
+            {
+                "command": "neo4j.removeParameter",
+                "title": "Neo4j: Remove Parameter",
+                "icon": {
+                    "dark": "images/icons/remove-dark.svg",
+                    "light": "images/icons/remove-light.svg"
+                }
+            },
+            {
+                "command": "neo4j.clearParameters",
+                "title": "Neo4j: Remove all Parameters"
+            },
+            {
+                "command": "neo4j.runReadCypher",
+                "title": "Neo4j: Run Cypher Statement in a Read Transaction"
+            },
+            {
+                "command": "neo4j.runWriteCypher",
+                "title": "Neo4j: Run Cypher Statement in a Write Transaction"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "neo4j.addConnection",
+                "key": "ctrl+alt+,",
+                "mac": "shift+cmd+,"
+            },
+            {
+                "command": "neo4j.removeConnection",
+                "key": "ctrl+alt+,",
+                "mac": "shift+cmd-,"
+            },
+            {
+                "command": "neo4j.clearConnections",
+                "key": "ctrl+alt+.",
+                "mac": "shift+cmd+."
+            },
+            {
+                "command": "neo4j.refresh",
+                "key": "ctrl+alt+.",
+                "mac": "shift+cmd+/"
+            },
+            {
+                "command": "neo4j.runReadCypher",
+                "key": "ctrl+alt+space",
+                "mac": "ctrl+cmd+space"
+            },
+            {
+                "command": "neo4j.runWriteCypher",
+                "key": "ctrl+alt+shift+space",
+                "mac": "ctrl+alt+cmd+space"
+            }
+        ],
+        "languages": [
+            {
+                "id": "cypher-markdown-injection"
+            },
+            {
+                "id": "cypher",
+                "aliases": [
+                    "Cypher Query Language",
+                    "cypher"
+                ],
+                "extensions": [
+                    ".cypher",
+                    ".cql",
+                    ".cy",
+                    ".cyp"
+                ],
+                "configuration": "./cypher/cypher.configuration.json",
+                "icon": {
+                    "dark": "images/logo/Neo4j-icon-white.png",
+                    "light": "images/logo/Neo4j-icon-color.png"
+                }
+            }
+        ],
+        "snippets": [
+            {
+                "language": "cypher",
+                "path": "./cypher/cypher.snippets.json"
+            },
+            {
+                "language": "cypher",
+                "path": "./cypher/cypher-db-admin.snippets.json"
+            },
+            {
+                "language": "cypher",
+                "path": "./cypher/cypher-role-admin.snippets.json"
+            },
+            {
+                "language": "cypher",
+                "path": "./cypher/cypher-user-admin.snippets.json"
+            },
+            {
+                "language": "javascript",
+                "path": "./snippets/nodejs.snippets.json"
+            },
+            {
+                "language": "typescript",
+                "path": "./snippets/typescript.snippets.json"
+            },
+            {
+                "language": "typescript",
+                "path": "./snippets/nodejs.snippets.json"
+            },
+            {
+                "language": "python",
+                "path": "./snippets/python.snippets.json"
+            }
+        ],
+        "menus": {
+            "view/item/context": [
+                {
+                    "when": "view == neo4j.connections && viewItem == connection",
+                    "command": "neo4j.setActiveConnection",
+                    "group": "inline"
+                },
+                {
+                    "when": "view == neo4j.connections && viewItem == connection",
+                    "command": "neo4j.removeConnection",
+                    "group": "inline"
+                },
+                {
+                    "when": "view == neo4j.parameters && viewItem == parameter",
+                    "command": "neo4j.removeParameter",
+                    "group": "inline"
+                },
+                {
+                    "when": "view == neo4j.parameters && viewItem == parameter",
+                    "command": "neo4j.setParameterValue",
+                    "group": "inline"
+                }
+            ]
+        }
+    },
+    "preview": false,
+    "scripts": {
+        "vscode:prepublish": "npm run esbuild-base -- --minify",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^8.0.0",
+        "@types/mocha": "^10.0.1",
+        "@types/node": "16.x",
+        "@types/vscode": "^1.74.0",
+        "@typescript-eslint/eslint-plugin": "^5.45.0",
+        "@typescript-eslint/parser": "^5.45.0",
+        "@vscode/test-electron": "^2.2.0",
+        "esbuild": "^0.16.16",
+        "eslint": "^8.28.0",
+        "glob": "^8.0.3",
+        "mocha": "^10.1.0",
+        "typescript": "^4.9.3"
+    },
+    "dependencies": {
+        "neo4j-driver": "^5.3.0"
+    },
+    "__metadata": {
+        "id": "ea38e725-4f4e-442a-83fc-1bd2d92b73c2",
+        "publisherDisplayName": "Adam Cowley",
+        "publisherId": "68aca428-7f48-4430-bd93-d05115780147",
+        "isPreReleaseVersion": false
+    }
 }
