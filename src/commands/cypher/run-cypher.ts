@@ -1,7 +1,34 @@
-import { window } from 'vscode'
+import * as vscode from 'vscode'
+import {window} from 'vscode'
 import ConnectionManager from '../../connections/connection-manager.class'
-import { Method } from '../../constants'
+import {Method} from '../../constants'
 import CypherRunner from '../../cypher/runner'
+
+// Check if we are inside a code block based on the cursor position
+const handleMarkdown = (editor: vscode.TextEditor) => {
+  const markdown = editor.document.getText()
+
+  const codeBlockRegex = /```cypher\n([\s\S]*?)\n```/g
+
+  const cursorPosition = editor.selection.active
+
+  let match: RegExpExecArray | null
+
+  while ((match = codeBlockRegex.exec(markdown)) !== null) {
+    const codeBlockStart = editor.document.positionAt(match.index)
+    const codeBlockEnd = editor.document.positionAt(match.index + match[0].length)
+
+    if (cursorPosition.isAfterOrEqual(codeBlockStart)
+      && cursorPosition.isBeforeOrEqual(codeBlockEnd)
+    ) {
+      const documentText = match[1]
+      return documentText
+    } else {
+      window.showErrorMessage(`Cursor is not inside a cypher code block`)
+      return
+    }
+  }
+}
 
 export default async function runCypher(
   connections: ConnectionManager,
@@ -26,6 +53,16 @@ export default async function runCypher(
       .filter(selection => !selection.isEmpty
           && editor.document.getText(selection)
       )
+
+    // Check if we are in a markdown file and if the cursor is inside a cypher code block
+    if (editor.document.languageId === 'markdown') {
+      const documentText = await handleMarkdown(editor)
+      if (documentText) {
+        await cypherRunner.run(activeConnection, documentText, method)
+      }
+
+      return
+    }
 
     // Attempt to run entire file
     if (selections.length === 0) {
