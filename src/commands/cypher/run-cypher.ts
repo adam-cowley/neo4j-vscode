@@ -8,7 +8,7 @@ import CypherRunner from '../../cypher/runner'
 const handleMarkdown = (editor: vscode.TextEditor) => {
   const markdown = editor.document.getText()
 
-  const codeBlockRegex = /(```|~~~)\s*context\n([\s\S]*?)\n\1/g
+  const codeBlockRegex = /(```|~~~)\s*cypher\n([\s\S]*?)\n\1/g
   
   const cursorPosition = editor.selection.active
 
