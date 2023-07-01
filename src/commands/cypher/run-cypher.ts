@@ -8,27 +8,22 @@ import CypherRunner from '../../cypher/runner'
 const handleMarkdown = (editor: vscode.TextEditor) => {
   const markdown = editor.document.getText()
 
-  const codeBlockRegexArr = [
-    /```\s*cypher\n([\s\S]*?)\n```/g,
-    /~~~\s*cypher\n([\s\S]*?)\n~~~/g,
-  ]
+  const codeBlockRegex = /(```|~~~)\s*context\n([\s\S]*?)\n\1/g
   
   const cursorPosition = editor.selection.active
 
   let match: RegExpExecArray | null
 
-  for (const codeBlockRegex of codeBlockRegexArr) {
-    while ((match = codeBlockRegex.exec(markdown)) !== null) {
-      const codeBlockStart = editor.document.positionAt(match.index)
-      const codeBlockEnd = editor.document.positionAt(match.index + match[0].length)
+  while ((match = codeBlockRegex.exec(markdown)) !== null) {
+    const codeBlockStart = editor.document.positionAt(match.index)
+    const codeBlockEnd = editor.document.positionAt(match.index + match[0].length)
     
-      if (cursorPosition.isAfterOrEqual(codeBlockStart)
+    if (cursorPosition.isAfterOrEqual(codeBlockStart)
       && cursorPosition.isBeforeOrEqual(codeBlockEnd)
-      ) {
-        const documentText = match[1].trim()
-        return documentText
-      } // Else: Check if the cursor is inside the next code block
-    }
+    ) {
+      const documentText = match[1].trim()
+      return documentText
+    } // Else: Check if the cursor is inside the next code block
   }
   window.showErrorMessage(`Cursor is not inside a cypher code block`)
 }
