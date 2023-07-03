@@ -81,6 +81,11 @@
 				"title": "Neo4j: Add Connection"
 			},
 			{
+				"command": "neo4j.getActiveConnection",
+				"enablement": "false",
+				"title": "Neo4j: Get active Connection"
+			},
+			{
 				"command": "neo4j.addAuraConnection",
 				"title": "Neo4j: Add Aura Connection"
 			},

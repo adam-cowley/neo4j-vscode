@@ -22,6 +22,10 @@ export function connectionSubscriptions(
     window.registerTreeDataProvider(
       "neo4j.connections",
       connections.getTreeProvider()
+    ),
+    commands.registerCommand(
+      'neo4j.getActiveConnection',
+      () => connections.getActive()
     )
   )
 
