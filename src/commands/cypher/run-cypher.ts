@@ -5,7 +5,9 @@ import {Method} from '../../constants'
 import CypherRunner from '../../cypher/runner'
 
 // Check if we are inside a code block based on the cursor position
-const handleMarkdown = (editor: vscode.TextEditor) => {
+const handleMarkdown = (editor: vscode.TextEditor):
+  | { text: string; error?: never }
+  | { text?: never; error: string } => {
   const markdown = editor.document.getText()
 
   const codeBlockRegex = /(```|~~~)\s*cypher\n([\s\S]*?)\n\1/g
@@ -21,11 +23,15 @@ const handleMarkdown = (editor: vscode.TextEditor) => {
     if (cursorPosition.isAfterOrEqual(codeBlockStart)
       && cursorPosition.isBeforeOrEqual(codeBlockEnd)
     ) {
-      const documentText = match[1].trim()
-      return documentText
+      const text = match[2].trim()
+      if (text.length === 0) {
+        return {error: 'No text in code block'}
+      }
+      
+      return {text}
     } // Else: Check if the cursor is inside the next code block
   }
-  window.showErrorMessage(`Cursor is not inside a cypher code block`)
+  return {error: 'Cursor is not inside a cypher code block'}
 }
 
 export default async function runCypher(
@@ -57,13 +63,20 @@ export default async function runCypher(
     if (selections.length === 0) {
       const isMarkdown = editor.document.languageId === 'markdown'
 
-      const documentText = 
-        isMarkdown ? await handleMarkdown(editor) :
-          editor.document.getText()
-
-      if (!documentText) {
-        window.showErrorMessage(`No text in ${isMarkdown ? 'code block' : 'document'}`)
-        return
+      let documentText: string
+      if (isMarkdown) {
+        const result = await handleMarkdown(editor)
+        if (result.error) {
+          window.showErrorMessage(result.error)
+          return
+        }
+        documentText = result.text!
+      } else {
+        documentText = editor.document.getText()
+        if (!documentText) {
+          window.showErrorMessage(`No text in document`)
+          return
+        }
       }
 
       await cypherRunner.run(activeConnection, documentText, method)
