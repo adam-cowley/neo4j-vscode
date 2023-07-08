@@ -10,7 +10,7 @@ const handleMarkdown = (editor: vscode.TextEditor):
   | { text?: never; error: string } => {
   const markdown = editor.document.getText()
 
-  const codeBlockRegex = /(```|~~~)\s*cypher\n([\s\S]*?)\n\1/g
+  const codeBlockRegex = /(```|~~~)+\s*cypher\s*\n([\s\S]*?)\n\1/g
   
   const cursorPosition = editor.selection.active
 
