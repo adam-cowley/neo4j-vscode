@@ -4,14 +4,21 @@ All notable changes to the "neo4j-vscode" extension will be documented in this f
 
 ## [0.1.9]
 
-- Added support for Cypher code blocks in Markdown files
-- Automatically selects the text within the code block when running a query if no selection is made
+- Automatically selects the text within code block(s) when running a query if no selection is made, based on cursor position(s)
+
+Example:
+
+The following will execute the queries separately
 
 ```cypher
-match (n) return n limit 1
+match (n) return n limit 1 // A cursor is here
 ```
 
-[Reference](https://stackoverflow.com/a/76239666/3876654)
+```cypher
+match (n) return n limit 10 // A cursor is here
+```
+
+- Added support for Cypher code blocks in Markdown files [Reference](https://stackoverflow.com/a/76239666/3876654)
 
 ## [0.1.8]
 
